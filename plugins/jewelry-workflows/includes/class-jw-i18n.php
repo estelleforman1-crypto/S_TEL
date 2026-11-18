@@ -66,6 +66,30 @@ class JW_I18n {
 		add_filter( 'woocommerce_product_get_short_description', array( __CLASS__, 'filter_product_short_description' ), 10, 2 );
 		add_filter( 'get_term', array( __CLASS__, 'filter_term' ), 10, 2 );
 		add_filter( 'woocommerce_variation_option_name', array( __CLASS__, 'filter_option_name' ), 10, 3 );
+		add_filter( 'woocommerce_short_description', array( __CLASS__, 'filter_wc_short_description' ), 5 );
+		add_filter( 'woocommerce_attribute_label', array( __CLASS__, 'filter_attribute_label' ), 10, 2 );
+	}
+
+	/** Attribute labels (for example "Ring size") are stored in option jw_attribute_labels[slug][lang]. */
+	public static function filter_attribute_label( $label, $name = '' ) {
+		if ( ! self::translating() ) {
+			return $label;
+		}
+		$slug   = wc_attribute_taxonomy_slug( (string) $name );
+		$labels = (array) get_option( 'jw_attribute_labels', array() );
+		return ! empty( $labels[ $slug ][ self::$lang ] ) ? $labels[ $slug ][ self::$lang ] : $label;
+	}
+
+	/** The single-product template reads post_excerpt directly, not through the product getter. */
+	public static function filter_wc_short_description( $text ) {
+		global $product;
+		if ( $product instanceof WC_Product && self::translating() ) {
+			$t = self::post_text( $product->get_id(), 'excerpt' );
+			if ( '' !== $t ) {
+				return wpautop( wp_kses_post( $t ) );
+			}
+		}
+		return $text;
 	}
 
 	private static function is_background_request( string $rest ): bool {
@@ -259,7 +283,8 @@ class JW_I18n {
 		if ( '' === $parent ) {
 			return $name;
 		}
-		$attrs = wc_get_formatted_variation( $variation, true, false, true );
+		// Pass the attribute array, not the object: with an object WooCommerce calls get_name(), which recurses into this filter.
+		$attrs = wc_get_formatted_variation( $variation->get_variation_attributes(), true, false );
 		return $attrs ? $parent . ' - ' . $attrs : $parent;
 	}
 

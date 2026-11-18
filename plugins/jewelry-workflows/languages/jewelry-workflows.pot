@@ -1,0 +1,1313 @@
+# Copyright (C) 2026 
+# This file is distributed under the same license as the Jewelry Workflows plugin.
+msgid ""
+msgstr ""
+"Project-Id-Version: Jewelry Workflows 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/jewelry-workflows\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-18T15:32:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: jewelry-workflows\n"
+
+#. Plugin Name of the plugin
+#: jewelry-workflows.php
+msgid "Jewelry Workflows"
+msgstr ""
+
+#. Description of the plugin
+#: jewelry-workflows.php
+msgid "Commission requests, quotes, deposits, production readiness, balance requests and languages for the jewelry store. WooCommerce stays the source of truth for products, orders and payments."
+msgstr ""
+
+#: includes/class-jw-admin.php:34
+#: includes/class-jw-admin.php:101
+msgid "Atelier"
+msgstr ""
+
+#: includes/class-jw-admin.php:35
+msgid "Overview"
+msgstr ""
+
+#: includes/class-jw-admin.php:36
+#: includes/class-jw-admin.php:102
+#: includes/class-jw-admin.php:164
+#: includes/class-jw-requests.php:54
+msgid "Record a request"
+msgstr ""
+
+#: includes/class-jw-admin.php:37
+msgid "Settings"
+msgstr ""
+
+#: includes/class-jw-admin.php:38
+#: includes/class-jw-admin.php:140
+#: includes/class-jw-admin.php:334
+#: includes/class-jw-admin.php:562
+msgid "Quote"
+msgstr ""
+
+#: includes/class-jw-admin.php:47
+msgid "You are not allowed to do this."
+msgstr ""
+
+#: includes/class-jw-admin.php:68
+msgid "Made-to-order deposit basis is not confirmed. Development uses the demo assumption \"50% of the full quoted total\". Live made-to-order deposits are disabled on a production site until you confirm the basis in Settings."
+msgstr ""
+
+#: includes/class-jw-admin.php:102
+msgid "All requests"
+msgstr ""
+
+#: includes/class-jw-admin.php:102
+msgid "Products"
+msgstr ""
+
+#: includes/class-jw-admin.php:102
+msgid "All orders"
+msgstr ""
+
+#: includes/class-jw-admin.php:105
+msgid "Needs attention: payment received after cancellation"
+msgstr ""
+
+#: includes/class-jw-admin.php:108
+msgid "New requests"
+msgstr ""
+
+#: includes/class-jw-admin.php:110
+#: includes/class-jw-admin.php:132
+#: includes/class-jw-admin.php:135
+msgid "None."
+msgstr ""
+
+#: includes/class-jw-admin.php:112
+#: includes/class-jw-admin.php:333
+#: includes/class-jw-admin.php:346
+#: includes/class-jw-admin.php:561
+#: includes/class-jw-requests.php:52
+#: includes/class-jw-requests.php:55
+msgid "Request"
+msgstr ""
+
+#: includes/class-jw-admin.php:112
+#: includes/class-jw-admin.php:169
+#: includes/class-jw-admin.php:347
+#: includes/class-jw-admin.php:367
+msgid "Type"
+msgstr ""
+
+#: includes/class-jw-admin.php:112
+#: includes/class-jw-admin.php:348
+msgid "State"
+msgstr ""
+
+#: includes/class-jw-admin.php:112
+msgid "Received"
+msgstr ""
+
+#: includes/class-jw-admin.php:118
+#: includes/class-jw-admin.php:356
+#: includes/class-jw-admin.php:367
+#: includes/class-jw-admin.php:561
+#: includes/class-jw-sale-types.php:104
+msgid "Made to order"
+msgstr ""
+
+#: includes/class-jw-admin.php:118
+#: includes/class-jw-admin.php:169
+#: includes/class-jw-admin.php:356
+#: includes/class-jw-admin.php:367
+#: includes/class-jw-admin.php:561
+msgid "Bespoke"
+msgstr ""
+
+#: includes/class-jw-admin.php:126
+msgid "Quotes waiting for the customer"
+msgstr ""
+
+#: includes/class-jw-admin.php:127
+msgid "Accepted: in production"
+msgstr ""
+
+#: includes/class-jw-admin.php:128
+msgid "Ready: balance due"
+msgstr ""
+
+#: includes/class-jw-admin.php:134
+msgid "Paid in full: ship or hand over"
+msgstr ""
+
+#: includes/class-jw-admin.php:136
+msgid "Ready-to-ship orders from the normal checkout are in WooCommerce > Orders."
+msgstr ""
+
+#: includes/class-jw-admin.php:140
+msgid "Order"
+msgstr ""
+
+#: includes/class-jw-admin.php:140
+msgid "Customer"
+msgstr ""
+
+#: includes/class-jw-admin.php:140
+#: includes/class-jw-admin.php:563
+msgid "Production"
+msgstr ""
+
+#: includes/class-jw-admin.php:140
+#: includes/class-jw-admin.php:564
+msgid "Payment"
+msgstr ""
+
+#: includes/class-jw-admin.php:140
+msgid "Outstanding"
+msgstr ""
+
+#: includes/class-jw-admin.php:146
+msgid "email failed"
+msgstr ""
+
+#: includes/class-jw-admin.php:165
+msgid "For requests that arrived by email, WhatsApp, phone or in person. Conversations in those channels are not synchronized automatically: copy the relevant details here."
+msgstr ""
+
+#: includes/class-jw-admin.php:169
+msgid "Made to order (existing product)"
+msgstr ""
+
+#: includes/class-jw-admin.php:170
+msgid "Channel"
+msgstr ""
+
+#: includes/class-jw-admin.php:170
+#: includes/class-jw-admin.php:371
+#: includes/class-jw-requests.php:266
+msgid "Phone"
+msgstr ""
+
+#: includes/class-jw-admin.php:170
+msgid "In person"
+msgstr ""
+
+#: includes/class-jw-admin.php:171
+msgid "Customer language"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+#: includes/class-jw-admin.php:369
+#: includes/class-jw-requests.php:259
+msgid "Name"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+#: includes/class-jw-admin.php:370
+#: includes/class-jw-requests.php:261
+#: includes/class-jw-requests.php:266
+msgid "Email"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+msgid "Phone / WhatsApp"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+msgid "Country code (for example IL)"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+#: includes/class-jw-requests.php:295
+msgid "City"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+#: includes/class-jw-requests.php:297
+msgid "Postcode"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+msgid "Product ID (made to order)"
+msgstr ""
+
+#: includes/class-jw-admin.php:172
+#: includes/class-jw-admin.php:380
+#: includes/class-jw-admin.php:507
+msgid "Quantity"
+msgstr ""
+
+#: includes/class-jw-admin.php:175
+#: includes/class-jw-admin.php:374
+#: includes/class-jw-requests.php:280
+msgid "Delivery"
+msgstr ""
+
+#: includes/class-jw-admin.php:175
+msgid "Ship"
+msgstr ""
+
+#: includes/class-jw-admin.php:175
+#: includes/class-jw-admin.php:210
+#: includes/class-jw-admin.php:374
+#: includes/class-jw-quotes.php:150
+#: includes/class-jw-requests.php:282
+msgid "Pickup"
+msgstr ""
+
+#: includes/class-jw-admin.php:176
+#: includes/class-jw-requests.php:300
+msgid "Street address"
+msgstr ""
+
+#: includes/class-jw-admin.php:177
+msgid "Brief / conversation summary"
+msgstr ""
+
+#: includes/class-jw-admin.php:178
+msgid "For a made-to-order variation, record the request and choose the options in the quote, or use the product page form on the customer's behalf."
+msgstr ""
+
+#: includes/class-jw-admin.php:179
+msgid "Save request"
+msgstr ""
+
+#: includes/class-jw-admin.php:193
+msgid "Atelier settings"
+msgstr ""
+
+#: includes/class-jw-admin.php:195
+msgid "Made-to-order deposit"
+msgstr ""
+
+#: includes/class-jw-admin.php:196
+msgid "Deposit percentage"
+msgstr ""
+
+#: includes/class-jw-admin.php:197
+msgid "Percentage of"
+msgstr ""
+
+#: includes/class-jw-admin.php:197
+msgid "Full quoted total (items + delivery)"
+msgstr ""
+
+#: includes/class-jw-admin.php:197
+msgid "Items only (without delivery)"
+msgstr ""
+
+#: includes/class-jw-admin.php:198
+msgid "I confirm this basis for live deposits"
+msgstr ""
+
+#: includes/class-jw-admin.php:199
+msgid "Bespoke quotes never use this rule: each bespoke quote has its own deposit amount."
+msgstr ""
+
+#: includes/class-jw-admin.php:200
+msgid "Quotes, languages and contact"
+msgstr ""
+
+#: includes/class-jw-admin.php:201
+#: includes/class-jw-admin.php:518
+msgid "Quote valid for (days)"
+msgstr ""
+
+#: includes/class-jw-admin.php:202
+msgid "Default language (no URL prefix)"
+msgstr ""
+
+#: includes/class-jw-admin.php:203
+msgid "Contact email"
+msgstr ""
+
+#: includes/class-jw-admin.php:204
+msgid "WhatsApp number (digits, with country code)"
+msgstr ""
+
+#: includes/class-jw-admin.php:205
+msgid "The default language is the language of the normal WordPress title and text fields. Choose it before you write content."
+msgstr ""
+
+#: includes/class-jw-admin.php:206
+msgid "Commission form"
+msgstr ""
+
+#: includes/class-jw-admin.php:207
+msgid "Max photos"
+msgstr ""
+
+#: includes/class-jw-admin.php:208
+msgid "Max MB per photo"
+msgstr ""
+
+#: includes/class-jw-admin.php:209
+msgid "Max submissions per hour per visitor"
+msgstr ""
+
+#: includes/class-jw-admin.php:211
+msgid "Offer pickup on request forms"
+msgstr ""
+
+#: includes/class-jw-admin.php:212
+msgid "Pickup location and arrangements"
+msgstr ""
+
+#: includes/class-jw-admin.php:213
+msgid "Stock hold time and the visibility of sold pieces are WooCommerce settings: WooCommerce > Settings > Products > Inventory (\"Hold stock\" and \"Out of stock visibility\"). Pickup at checkout for ready-stock items is a WooCommerce shipping method (Local pickup)."
+msgstr ""
+
+#: includes/class-jw-admin.php:228
+msgid "Saved, but pickup stays off until you enter the pickup location and arrangements."
+msgstr ""
+
+#: includes/class-jw-admin.php:231
+msgid "Settings saved."
+msgstr ""
+
+#: includes/class-jw-admin.php:242
+msgid "Request recorded."
+msgstr ""
+
+#: includes/class-jw-admin.php:254
+msgid "This request already has a quote."
+msgstr ""
+
+#: includes/class-jw-admin.php:260
+msgid "Quote saved as draft. Check it, then send it to the customer."
+msgstr ""
+
+#: includes/class-jw-admin.php:266
+msgid "Quote order not found."
+msgstr ""
+
+#: includes/class-jw-admin.php:275
+msgid "Quote revised. Send it to issue a new link; the old link no longer works."
+msgstr ""
+
+#: includes/class-jw-admin.php:282
+msgid "Quote sent. See the order notes for the email result."
+msgstr ""
+
+#: includes/class-jw-admin.php:289
+msgid "Quote cancelled. Its payment links no longer work."
+msgstr ""
+
+#: includes/class-jw-admin.php:300
+msgid "Production status updated."
+msgstr ""
+
+#: includes/class-jw-admin.php:311
+msgid "Marked ready. The balance request email was handed to the mail system."
+msgstr ""
+
+#: includes/class-jw-admin.php:312
+msgid "Marked ready, but the balance email FAILED. Use \"Retry email\" or copy the payment link."
+msgstr ""
+
+#: includes/class-jw-admin.php:313
+msgid "Already ready. The existing balance request was kept and no second email was sent. Use \"Retry email\" to send it again."
+msgstr ""
+
+#: includes/class-jw-admin.php:314
+msgid "Marked ready. Nothing is outstanding."
+msgstr ""
+
+#: includes/class-jw-admin.php:324
+msgid "There is no open balance request."
+msgstr ""
+
+#: includes/class-jw-admin.php:327
+msgid "Email handed to the mail system."
+msgstr ""
+
+#: includes/class-jw-admin.php:327
+msgid "Email FAILED again. Copy the payment link and send it yourself."
+msgstr ""
+
+#: includes/class-jw-admin.php:335
+msgid "Timeline"
+msgstr ""
+
+#: includes/class-jw-admin.php:337
+msgid "Commission workflow"
+msgstr ""
+
+#: includes/class-jw-admin.php:339
+msgid "Translations"
+msgstr ""
+
+#: includes/class-jw-admin.php:349
+msgid "Quote order"
+msgstr ""
+
+#: includes/class-jw-admin.php:350
+msgid "Date"
+msgstr ""
+
+#: includes/class-jw-admin.php:368
+msgid "Source"
+msgstr ""
+
+#: includes/class-jw-admin.php:368
+msgid "Recorded manually"
+msgstr ""
+
+#: includes/class-jw-admin.php:368
+msgid "Website form"
+msgstr ""
+
+#: includes/class-jw-admin.php:372
+#: includes/class-jw-requests.php:265
+msgid "Preferred contact"
+msgstr ""
+
+#: includes/class-jw-admin.php:373
+msgid "Language"
+msgstr ""
+
+#: includes/class-jw-admin.php:375
+msgid "Desired date"
+msgstr ""
+
+#: includes/class-jw-admin.php:379
+msgid "Product"
+msgstr ""
+
+#: includes/class-jw-admin.php:379
+msgid "(deleted product)"
+msgstr ""
+
+#: includes/class-jw-admin.php:381
+msgid "Price shown at request time"
+msgstr ""
+
+#: includes/class-jw-admin.php:389
+msgid "Brief / notes"
+msgstr ""
+
+#: includes/class-jw-admin.php:389
+msgid "Size and material preferences"
+msgstr ""
+
+#: includes/class-jw-admin.php:396
+msgid "Reference photos (private)"
+msgstr ""
+
+#: includes/class-jw-admin.php:404
+msgid "Request state"
+msgstr ""
+
+#: includes/class-jw-admin.php:407
+msgid "Email customer"
+msgstr ""
+
+#: includes/class-jw-admin.php:411
+msgid "Open WhatsApp"
+msgstr ""
+
+#. translators: %d: order id
+#: includes/class-jw-admin.php:439
+#, php-format
+msgid "Open quote order #%d"
+msgstr ""
+
+#. translators: %d: order id
+#: includes/class-jw-admin.php:442
+#: includes/class-jw-admin.php:453
+msgid "Prepare quote"
+msgstr ""
+
+#: includes/class-jw-admin.php:450
+msgid "Request not found."
+msgstr ""
+
+#. translators: %d: order id
+#: includes/class-jw-admin.php:453
+#, php-format
+msgid "Revise quote #%d"
+msgstr ""
+
+#: includes/class-jw-admin.php:460
+msgid "Saving a revision makes the previous quote link and any unpaid deposit link stop working. Send the quote again afterwards."
+msgstr ""
+
+#: includes/class-jw-admin.php:463
+msgid "Save revision"
+msgstr ""
+
+#: includes/class-jw-admin.php:463
+msgid "Save quote as draft"
+msgstr ""
+
+#: includes/class-jw-admin.php:506
+msgid "Unit price"
+msgstr ""
+
+#: includes/class-jw-admin.php:506
+msgid "Fixed in the quote. Later product price changes do not affect it."
+msgstr ""
+
+#: includes/class-jw-admin.php:509
+msgid "Piece description (shown to customer)"
+msgstr ""
+
+#: includes/class-jw-admin.php:510
+msgid "Price"
+msgstr ""
+
+#: includes/class-jw-admin.php:511
+msgid "Deposit amount (required)"
+msgstr ""
+
+#: includes/class-jw-admin.php:511
+msgid "Bespoke deposits are set per quote. 0 means no deposit."
+msgstr ""
+
+#: includes/class-jw-admin.php:514
+msgid "Quoted delivery cost"
+msgstr ""
+
+#: includes/class-jw-admin.php:515
+msgid "Delivery method (shown to customer)"
+msgstr ""
+
+#: includes/class-jw-admin.php:517
+msgid "Production time (shown to customer)"
+msgstr ""
+
+#: includes/class-jw-admin.php:520
+msgid "Scope and terms (shown to customer)"
+msgstr ""
+
+#. translators: 1: percent, 2: basis
+#: includes/class-jw-admin.php:523
+#, php-format
+msgid "Deposit: %1$d%% of the %2$s (shared made-to-order rule)."
+msgstr ""
+
+#. translators: 1: percent, 2: basis
+#: includes/class-jw-admin.php:523
+msgid "item price"
+msgstr ""
+
+#. translators: 1: percent, 2: basis
+#: includes/class-jw-admin.php:523
+msgid "full total including delivery"
+msgstr ""
+
+#. translators: 1: percent, 2: basis
+#: includes/class-jw-admin.php:523
+msgid "Demo assumption, not confirmed."
+msgstr ""
+
+#: includes/class-jw-admin.php:537
+msgid "This order is a deposit payment request."
+msgstr ""
+
+#: includes/class-jw-admin.php:537
+msgid "This order is a balance payment request."
+msgstr ""
+
+#. translators: %d: order id
+#: includes/class-jw-admin.php:539
+#, php-format
+msgid "Open commission order #%d"
+msgstr ""
+
+#: includes/class-jw-admin.php:541
+msgid "Refund payments here, in this order. The commission order recalculates paid and outstanding amounts automatically."
+msgstr ""
+
+#: includes/class-jw-admin.php:546
+msgid "Payment arrived after this order was cancelled. Stock was not reduced again. Refund the payment, or check stock and restore the order."
+msgstr ""
+
+#: includes/class-jw-admin.php:548
+msgid "Ready-to-ship order from the normal checkout. No commission workflow."
+msgstr ""
+
+#: includes/class-jw-admin.php:565
+msgid "Fulfillment"
+msgstr ""
+
+#: includes/class-jw-admin.php:566
+msgid "Total / deposit / paid / outstanding"
+msgstr ""
+
+#: includes/class-jw-admin.php:567
+msgid "Deposit rule"
+msgstr ""
+
+#: includes/class-jw-admin.php:569
+msgid "Quote link"
+msgstr ""
+
+#: includes/class-jw-admin.php:571
+msgid "Payment requests"
+msgstr ""
+
+#: includes/class-jw-admin.php:583
+msgid "Send quote to customer"
+msgstr ""
+
+#: includes/class-jw-admin.php:583
+msgid "Re-send quote (new link)"
+msgstr ""
+
+#: includes/class-jw-admin.php:587
+msgid "Set: in production"
+msgstr ""
+
+#: includes/class-jw-admin.php:590
+msgid "Mark ready and request balance"
+msgstr ""
+
+#: includes/class-jw-admin.php:592
+msgid "Check balance request"
+msgstr ""
+
+#: includes/class-jw-admin.php:593
+msgid "Retry email"
+msgstr ""
+
+#: includes/class-jw-admin.php:597
+msgid "Cancel quote"
+msgstr ""
+
+#: includes/class-jw-admin.php:601
+msgid "Revise quote"
+msgstr ""
+
+#: includes/class-jw-admin.php:603
+msgid "Fulfillment: when the order is paid in full it moves to \"Processing\". Set it to \"Completed\" after shipping or pickup. Completing is blocked while a balance is unpaid."
+msgstr ""
+
+#. translators: %s: language
+#: includes/class-jw-admin.php:611
+#, php-format
+msgid "The main title and text above are in %s (the default language). Write the other languages here. Empty fields show the default language."
+msgstr ""
+
+#: includes/class-jw-admin.php:618
+msgid "Title"
+msgstr ""
+
+#: includes/class-jw-admin.php:619
+msgid "Short description"
+msgstr ""
+
+#: includes/class-jw-admin.php:619
+msgid "Excerpt"
+msgstr ""
+
+#: includes/class-jw-admin.php:620
+msgid "Text"
+msgstr ""
+
+#. translators: %s: language
+#: includes/class-jw-admin.php:654
+#, php-format
+msgid "Name (%s)"
+msgstr ""
+
+#. translators: %s: shop name
+#: includes/class-jw-emails.php:50
+#, php-format
+msgid "We received your request – %s"
+msgstr ""
+
+#: includes/class-jw-emails.php:51
+msgid "Request received"
+msgstr ""
+
+#: includes/class-jw-emails.php:52
+msgid "Thank you for your request. This is a confirmation that we received it. It is not an accepted order and nothing has been charged."
+msgstr ""
+
+#: includes/class-jw-emails.php:53
+msgid "You will receive a reply with questions or a quote. The quote shows the full price, delivery cost, production time and the deposit."
+msgstr ""
+
+#. translators: %d: request number
+#: includes/class-jw-emails.php:55
+#, php-format
+msgid "Request number: %d"
+msgstr ""
+
+#: includes/class-jw-emails.php:80
+msgid "Thank you for your patience. Your quote is ready."
+msgstr ""
+
+#: includes/class-jw-emails.php:82
+msgid "Full total, including delivery"
+msgstr ""
+
+#: includes/class-jw-emails.php:83
+#: templates/quote.php:52
+msgid "Deposit due now"
+msgstr ""
+
+#: includes/class-jw-emails.php:84
+msgid "Balance due when the piece is ready"
+msgstr ""
+
+#. translators: %s: date
+#: includes/class-jw-emails.php:87
+#, php-format
+msgid "This quote is valid until %s."
+msgstr ""
+
+#: includes/class-jw-emails.php:89
+msgid "View the quote"
+msgstr ""
+
+#. translators: 1: order number, 2: shop name
+#: includes/class-jw-emails.php:92
+#, php-format
+msgid "Your quote #%1$d – %2$s"
+msgstr ""
+
+#. translators: 1: order number, 2: version
+#: includes/class-jw-emails.php:93
+#: templates/quote.php:23
+msgid "Your quote"
+msgstr ""
+
+#: includes/class-jw-emails.php:106
+msgid "Your piece is ready."
+msgstr ""
+
+#: includes/class-jw-emails.php:108
+#: templates/quote.php:51
+msgid "Full total"
+msgstr ""
+
+#: includes/class-jw-emails.php:109
+msgid "Already paid"
+msgstr ""
+
+#: includes/class-jw-emails.php:110
+msgid "Balance due now"
+msgstr ""
+
+#: includes/class-jw-emails.php:111
+msgid "We ship or hand over the piece after the balance is paid."
+msgstr ""
+
+#: includes/class-jw-emails.php:112
+msgid "Pay the balance"
+msgstr ""
+
+#. translators: 1: order number, 2: shop name
+#: includes/class-jw-emails.php:115
+#, php-format
+msgid "Your piece is ready – balance for order #%1$d – %2$s"
+msgstr ""
+
+#: includes/class-jw-emails.php:116
+msgid "Your piece is ready"
+msgstr ""
+
+#: includes/class-jw-emails.php:130
+msgid "Deposit received"
+msgstr ""
+
+#: includes/class-jw-emails.php:130
+msgid "Payment received"
+msgstr ""
+
+#. translators: %s: amount
+#: includes/class-jw-emails.php:132
+#, php-format
+msgid "We received your payment of %s. Thank you."
+msgstr ""
+
+#. translators: %s: amount
+#: includes/class-jw-emails.php:135
+#, php-format
+msgid "Remaining balance: %s. We will email you a payment link when the piece is ready."
+msgstr ""
+
+#: includes/class-jw-emails.php:137
+msgid "Your order is paid in full. We will contact you about shipping or pickup."
+msgstr ""
+
+#. translators: 1: heading, 2: order number
+#: includes/class-jw-emails.php:140
+#, php-format
+msgid "%1$s – order #%2$d"
+msgstr ""
+
+#: includes/class-jw-lock.php:29
+msgid "This action is already in progress. Please wait a moment and reload."
+msgstr ""
+
+#: includes/class-jw-payments.php:36
+#: includes/class-jw-payments.php:52
+msgctxt "Order status"
+msgid "Commission open"
+msgstr ""
+
+#. translators: %s: number of orders
+#: includes/class-jw-payments.php:42
+#, php-format
+msgid "Commission open <span class=\"count\">(%s)</span>"
+msgid_plural "Commissions open <span class=\"count\">(%s)</span>"
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-jw-payments.php:143
+msgid "Unpaid"
+msgstr ""
+
+#: includes/class-jw-payments.php:144
+msgid "Deposit paid"
+msgstr ""
+
+#: includes/class-jw-payments.php:145
+msgid "Balance due"
+msgstr ""
+
+#: includes/class-jw-payments.php:146
+msgid "Paid in full"
+msgstr ""
+
+#: includes/class-jw-payments.php:147
+msgid "Refunded"
+msgstr ""
+
+#: includes/class-jw-payments.php:148
+msgid "Partially refunded"
+msgstr ""
+
+#: includes/class-jw-payments.php:155
+msgid "Not started"
+msgstr ""
+
+#: includes/class-jw-payments.php:156
+msgid "In production"
+msgstr ""
+
+#: includes/class-jw-payments.php:157
+msgid "Ready"
+msgstr ""
+
+#. translators: %d: order number
+#: includes/class-jw-payments.php:201
+#, php-format
+msgid "Deposit for order #%d"
+msgstr ""
+
+#. translators: %d: order number
+#: includes/class-jw-payments.php:201
+#, php-format
+msgid "Balance for order #%d"
+msgstr ""
+
+#: includes/class-jw-payments.php:295
+msgid "Not changed: this order still has an unpaid balance. Mark it ready to send the balance request."
+msgstr ""
+
+#: includes/class-jw-payments.php:322
+msgid "Only an accepted quote can be marked ready."
+msgstr ""
+
+#: includes/class-jw-payments.php:325
+msgid "This order is closed."
+msgstr ""
+
+#: includes/class-jw-payments.php:329
+msgid "The deposit is not paid yet."
+msgstr ""
+
+#: includes/class-jw-quotes.php:25
+msgid "Draft (not sent)"
+msgstr ""
+
+#: includes/class-jw-quotes.php:26
+#: includes/class-jw-requests.php:37
+msgid "Quote sent"
+msgstr ""
+
+#: includes/class-jw-quotes.php:27
+#: includes/class-jw-requests.php:38
+msgid "Accepted"
+msgstr ""
+
+#: includes/class-jw-quotes.php:28
+#: includes/class-jw-requests.php:39
+msgid "Declined"
+msgstr ""
+
+#: includes/class-jw-quotes.php:29
+#: includes/class-jw-requests.php:40
+msgid "Expired"
+msgstr ""
+
+#: includes/class-jw-quotes.php:30
+msgid "Cancelled"
+msgstr ""
+
+#: includes/class-jw-quotes.php:94
+msgid "A payment was already received for this quote. Refund or reconcile it before you change the quote."
+msgstr ""
+
+#: includes/class-jw-quotes.php:97
+msgid "This quote can no longer be revised."
+msgstr ""
+
+#: includes/class-jw-quotes.php:103
+msgid "Enter the quoted delivery cost (0 is allowed only if you mean free delivery)."
+msgstr ""
+
+#: includes/class-jw-quotes.php:110
+msgid "The requested product no longer exists."
+msgstr ""
+
+#: includes/class-jw-quotes.php:115
+msgid "Enter a price for the piece."
+msgstr ""
+
+#: includes/class-jw-quotes.php:121
+msgid "Enter a description and a price for the commission."
+msgstr ""
+
+#: includes/class-jw-quotes.php:150
+msgid "Quoted delivery"
+msgstr ""
+
+#: includes/class-jw-quotes.php:181
+msgid "Enter the deposit amount for this bespoke quote."
+msgstr ""
+
+#: includes/class-jw-quotes.php:187
+msgid "The deposit must be between 0 and the full total."
+msgstr ""
+
+#: includes/class-jw-quotes.php:225
+msgid "Only a draft or sent quote can be sent."
+msgstr ""
+
+#: includes/class-jw-quotes.php:228
+msgid "Made-to-order deposits are disabled until you confirm the deposit basis in Atelier > Settings."
+msgstr ""
+
+#: includes/class-jw-quotes.php:249
+msgid "A payment was received. Refund it in the payment order before you cancel."
+msgstr ""
+
+#: includes/class-jw-quotes.php:290
+msgid "This quote link is no longer valid. A newer quote may have been sent to you."
+msgstr ""
+
+#: includes/class-jw-quotes.php:296
+#: templates/quote.php:83
+msgid "This quote has expired. Please contact us for an updated quote."
+msgstr ""
+
+#: includes/class-jw-quotes.php:299
+msgid "The deposit for this quote is already paid."
+msgstr ""
+
+#: includes/class-jw-quotes.php:302
+msgid "This quote can no longer be accepted."
+msgstr ""
+
+#: includes/class-jw-quotes.php:305
+msgid "Online deposits are not available yet. Please contact us."
+msgstr ""
+
+#: includes/class-jw-quotes.php:318
+msgid "Thank you. No deposit is due for this quote. We will contact you when the piece is ready."
+msgstr ""
+
+#: includes/class-jw-quotes.php:327
+msgid "This quote can no longer be changed."
+msgstr ""
+
+#: includes/class-jw-quotes.php:354
+msgid "This quote link is not valid. It may have been replaced by a newer quote. Please use the most recent email, or contact us."
+msgstr ""
+
+#: includes/class-jw-quotes.php:363
+msgid "Your session expired. Please try again."
+msgstr ""
+
+#: includes/class-jw-quotes.php:375
+msgid "You declined this quote. Thank you for letting us know."
+msgstr ""
+
+#: includes/class-jw-requests.php:35
+msgid "New"
+msgstr ""
+
+#: includes/class-jw-requests.php:36
+msgid "Needs clarification"
+msgstr ""
+
+#: includes/class-jw-requests.php:41
+msgid "Closed"
+msgstr ""
+
+#: includes/class-jw-requests.php:51
+msgid "Requests"
+msgstr ""
+
+#: includes/class-jw-requests.php:53
+msgid "Record a request (email, WhatsApp, in person)"
+msgstr ""
+
+#: includes/class-jw-requests.php:80
+msgid "Please enter your name."
+msgstr ""
+
+#: includes/class-jw-requests.php:83
+msgid "Please enter a valid email address."
+msgstr ""
+
+#: includes/class-jw-requests.php:109
+msgid "This piece is not available for requests."
+msgstr ""
+
+#. translators: %s: option name, for example Size
+#: includes/class-jw-requests.php:119
+#, php-format
+msgid "Please choose: %s"
+msgstr ""
+
+#: includes/class-jw-requests.php:125
+msgid "This combination of options is not available."
+msgstr ""
+
+#: includes/class-jw-requests.php:129
+msgid "Please choose the delivery country so that delivery can be quoted."
+msgstr ""
+
+#: includes/class-jw-requests.php:139
+msgid "Please describe the piece you have in mind."
+msgstr ""
+
+#: includes/class-jw-requests.php:200
+msgid "Your session expired. Please submit the form again."
+msgstr ""
+
+#: includes/class-jw-requests.php:208
+msgid "Too many requests from this connection. Please try again later or contact us directly."
+msgstr ""
+
+#: includes/class-jw-requests.php:243
+msgid "Thank you. Your request has been received. It is not an order yet: you will receive a reply with a quote, or questions, by email. Nothing has been charged."
+msgstr ""
+
+#: includes/class-jw-requests.php:263
+msgid "Phone or WhatsApp (optional)"
+msgstr ""
+
+#: includes/class-jw-requests.php:266
+msgid "WhatsApp"
+msgstr ""
+
+#: includes/class-jw-requests.php:281
+msgid "Ship to me"
+msgstr ""
+
+#: includes/class-jw-requests.php:287
+msgid "Delivery country"
+msgstr ""
+
+#: includes/class-jw-requests.php:289
+msgid "Choose a country"
+msgstr ""
+
+#: includes/class-jw-requests.php:350
+msgid "Notes (optional)"
+msgstr ""
+
+#: includes/class-jw-requests.php:351
+msgid "This sends a request, not a payment. You will receive a quote with delivery cost, the full total, the deposit due now and the balance due later."
+msgstr ""
+
+#: includes/class-jw-requests.php:352
+msgid "Send request"
+msgstr ""
+
+#: includes/class-jw-requests.php:364
+msgid "Describe the piece you have in mind"
+msgstr ""
+
+#: includes/class-jw-requests.php:366
+msgid "Size and material preferences (optional)"
+msgstr ""
+
+#: includes/class-jw-requests.php:368
+msgid "Reference photos (optional)"
+msgstr ""
+
+#. translators: 1: number of photos, 2: megabytes
+#: includes/class-jw-requests.php:371
+#, php-format
+msgid "Up to %1$d photos, JPEG, PNG or WebP, %2$d MB each. Photos are private and seen only by the maker."
+msgstr ""
+
+#: includes/class-jw-requests.php:373
+msgid "Desired date (optional)"
+msgstr ""
+
+#: includes/class-jw-requests.php:375
+msgid "A wish, not a promise. Timing is confirmed in the quote."
+msgstr ""
+
+#: includes/class-jw-requests.php:378
+msgid "Sending this form does not create an order or a commitment. You will receive a reply to discuss the piece, then a quote."
+msgstr ""
+
+#: includes/class-jw-requests.php:379
+msgid "Send commission request"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:66
+msgid "How this piece is sold"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:68
+msgid "Ready to ship (cart and full payment)"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:69
+msgid "Made to order (request, shipping quote, deposit)"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:72
+msgid "One-of-a-kind pieces are \"Ready to ship\" with stock quantity 1."
+msgstr ""
+
+#: includes/class-jw-sale-types.php:78
+msgid "Production time (weeks)"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:82
+msgid "Made-to-order only. Leave empty if the time is given in each quote."
+msgstr ""
+
+#. translators: %d: number of weeks
+#: includes/class-jw-sale-types.php:107
+#, php-format
+msgid "Production time: about %d week after the deposit."
+msgid_plural "Production time: about %d weeks after the deposit."
+msgstr[0] ""
+msgstr[1] ""
+
+#: includes/class-jw-sale-types.php:109
+msgid "Production time is confirmed in your quote."
+msgstr ""
+
+#: includes/class-jw-sale-types.php:111
+msgid "Send a request. Delivery is quoted for your address before you pay anything."
+msgstr ""
+
+#. translators: %s: deposit percentage
+#: includes/class-jw-sale-types.php:113
+#, php-format
+msgid "A %s%% deposit starts production. The balance is due when the piece is ready, before shipping or pickup."
+msgstr ""
+
+#: includes/class-jw-sale-types.php:117
+msgid "One of a kind, ready to ship"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:117
+msgid "Ready to ship"
+msgstr ""
+
+#: includes/class-jw-sale-types.php:118
+msgid "Full payment at checkout. Delivery cost is shown before you pay."
+msgstr ""
+
+#: includes/class-jw-sale-types.php:134
+msgid "Request this piece"
+msgstr ""
+
+#. translators: %d: maximum number of photos
+#: includes/class-jw-uploads.php:60
+#, php-format
+msgid "Please attach at most %d photos."
+msgstr ""
+
+#: includes/class-jw-uploads.php:66
+msgid "A photo could not be uploaded. Please try again."
+msgstr ""
+
+#. translators: %d: maximum size in megabytes
+#: includes/class-jw-uploads.php:70
+#, php-format
+msgid "Each photo must be smaller than %d MB."
+msgstr ""
+
+#: includes/class-jw-uploads.php:74
+msgid "Photos must be JPEG, PNG or WebP images."
+msgstr ""
+
+#: includes/class-jw-uploads.php:85
+msgid "A photo could not be saved. Please try again."
+msgstr ""
+
+#: includes/class-jw-uploads.php:109
+msgid "You are not allowed to view this file."
+msgstr ""
+
+#: includes/class-jw-uploads.php:116
+msgid "File not found."
+msgstr ""
+
+#: templates/quote.php:14
+msgid "Quote not available"
+msgstr ""
+
+#. translators: 1: order number, 2: version
+#: templates/quote.php:22
+#, php-format
+msgid "Quote #%1$d · version %2$d"
+msgstr ""
+
+#: templates/quote.php:33
+msgid "Scope"
+msgstr ""
+
+#: templates/quote.php:53
+msgid "Balance due when the piece is ready, before shipping or pickup"
+msgstr ""
+
+#: templates/quote.php:55
+msgid "Paid so far"
+msgstr ""
+
+#: templates/quote.php:62
+msgid "Production time"
+msgstr ""
+
+#: templates/quote.php:65
+msgid "Valid until"
+msgstr ""
+
+#: templates/quote.php:67
+msgid "Status"
+msgstr ""
+
+#: templates/quote.php:75
+msgid "Pay the deposit"
+msgstr ""
+
+#: templates/quote.php:75
+msgid "Accept and pay the deposit"
+msgstr ""
+
+#: templates/quote.php:78
+msgid "Decline"
+msgstr ""
+
+#: templates/quote.php:81
+msgid "Payment is made on the secure payment page. The amount is fixed by this quote."
+msgstr ""

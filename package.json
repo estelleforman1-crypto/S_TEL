@@ -1,0 +1,13 @@
+{
+  "name": "jewelry-store",
+  "private": true,
+  "description": "Browser tests for the jewelry store theme and workflows.",
+  "scripts": {
+    "test:visual": "node tests/e2e/visual.js",
+    "test:flows": "node tests/e2e/flows.js",
+    "test:admin": "node tests/e2e/admin.js"
+  },
+  "devDependencies": {
+    "playwright": "1.63.0"
+  }
+}

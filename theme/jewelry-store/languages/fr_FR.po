@@ -1,0 +1,173 @@
+# DRAFT TRANSLATION – review material only. The owner writes or approves the final text.
+# This file is distributed under the same license as the Jewelry Store theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: Jewelry Store 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/jewelry-store\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: fr_FR\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-18T15:32:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: jewelry-store\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Jewelry Store"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "Code-owned storefront theme for the jewelry store. Image-led, monochrome, Hebrew/English/French with full RTL. No page builder."
+msgstr ""
+
+#: 404.php:6
+msgid "Page not found"
+msgstr "Page introuvable"
+
+#: 404.php:7
+msgid "This page does not exist, or the piece is no longer listed."
+msgstr "Cette page n'existe pas, ou la pièce n'est plus présentée."
+
+#: 404.php:9
+msgid "See all pieces"
+msgstr "Voir toutes les pièces"
+
+#: 404.php:10
+msgid "Home"
+msgstr "Accueil"
+
+#: footer.php:5
+msgid "Information"
+msgstr "Informations"
+
+#: footer.php:19
+msgid "Contact"
+msgstr "Contact"
+
+#: footer.php:25
+msgid "[Contact details to be supplied]"
+msgstr "[Coordonnées à fournir]"
+
+#: footer.php:30
+msgid "Language"
+msgstr "Langue"
+
+#: front-page.php:45
+msgid "Discover the pieces"
+msgstr "Découvrir les pièces"
+
+#: front-page.php:51
+msgid "Available now"
+msgstr "Disponibles maintenant"
+
+#: front-page.php:66
+msgid "All available pieces"
+msgstr "Toutes les pièces disponibles"
+
+#: front-page.php:76
+msgid "Collection"
+msgstr "Collection"
+
+#: front-page.php:78
+msgid "See more"
+msgstr "Voir plus"
+
+#: front-page.php:86
+msgid "Made for you"
+msgstr "Créé pour vous"
+
+#: front-page.php:90
+msgid "Made-to-order designs: choose the size and material on the piece, send a request, and receive a quote with delivery before paying a deposit."
+msgstr "Créations sur commande : choisissez la taille et la matière sur la pièce, envoyez une demande et recevez un devis avec la livraison avant de verser un acompte."
+
+#: front-page.php:91
+msgid "Bespoke pieces: describe your idea and add reference photos. The design and price are agreed with you first."
+msgstr "Pièces sur mesure : décrivez votre idée et ajoutez des photos de référence. Le dessin et le prix sont d'abord convenus avec vous."
+
+#: front-page.php:93
+msgid "Made-to-order designs"
+msgstr "Créations sur commande"
+
+#: front-page.php:94
+msgid "Request a commission"
+msgstr "Demander une création"
+
+#: front-page.php:110
+msgid "Read more"
+msgstr "Lire la suite"
+
+#: functions.php:29
+#: header.php:26
+msgid "Main navigation"
+msgstr "Navigation principale"
+
+#: functions.php:30
+msgid "Footer links"
+msgstr ""
+
+#: functions.php:77
+#: functions.php:103
+msgid "Made to order"
+msgstr "Sur commande"
+
+#: functions.php:80
+msgid "Sold"
+msgstr "Vendu"
+
+#: functions.php:83
+msgid "One of a kind"
+msgstr "Pièce unique"
+
+#: functions.php:97
+msgid "Filter pieces"
+msgstr "Filtrer les pièces"
+
+#: functions.php:98
+msgid "All"
+msgstr "Tout"
+
+#: functions.php:103
+msgid "Any availability"
+msgstr "Toute disponibilité"
+
+#: functions.php:103
+msgid "Ready to ship"
+msgstr "Prêt à expédier"
+
+#: functions.php:115
+msgid "Bag"
+msgstr "Panier"
+
+#. translators: %d: number of items
+#: functions.php:117
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] "%d article"
+msgstr[1] "%d articles"
+
+#: functions.php:151
+msgid "Image to be supplied"
+msgstr "Image à fournir"
+
+#: header.php:10
+msgid "Skip to content"
+msgstr "Aller au contenu"
+
+#: header.php:12
+msgid "Development build: demo products, demo prices and placeholder brand. Nothing here is for sale."
+msgstr "Version de développement : produits, prix et marque de démonstration. Rien n'est à vendre."
+
+#: header.php:18
+msgid "Menu"
+msgstr "Menu"
+
+#: index.php:14
+msgid "Nothing found"
+msgstr "Aucun résultat"

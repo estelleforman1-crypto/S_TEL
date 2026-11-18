@@ -1,0 +1,63 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    services:
+      mysql:
+        image: mysql:8.0
+        env:
+          MYSQL_ROOT_PASSWORD: root
+          MYSQL_DATABASE: jewelry_ci
+        ports: ["3306:3306"]
+        options: >-
+          --health-cmd="mysqladmin ping -proot" --health-interval=5s --health-timeout=5s --health-retries=20
+    env:
+      DB_ENGINE: mysql
+      DB_NAME: jewelry_ci
+      DB_USER: root
+      DB_PASSWORD: root
+      DB_HOST: 127.0.0.1
+      SITE_URL: http://localhost:8080
+      WP_CLI: wp
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.3"
+          extensions: mysqli, gd, intl, zip, fileinfo
+          tools: wp-cli
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: PHP syntax check
+        run: find plugins theme scripts tests -name '*.php' -print0 | xargs -0 -n1 php -l > /dev/null
+      - name: Build the development site (MySQL)
+        run: scripts/setup-dev.sh
+      - name: Integration tests (MySQL, real WooCommerce)
+        run: tests/run-integration.sh
+      - name: Install browser
+        run: npm ci || npm install && npx playwright install --with-deps chromium
+      - name: Start server
+        run: |
+          nohup scripts/serve.sh > server.log 2>&1 &
+          for i in $(seq 1 30); do curl -fs http://localhost:8080/ > /dev/null && break; sleep 1; done
+      - name: Browser flows
+        run: node tests/e2e/flows.js
+      - name: Admin workflow
+        run: node tests/e2e/admin.js
+      - name: Responsive and RTL checks
+        run: node tests/e2e/visual.js
+      - name: Upload screenshots and logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: screenshots-and-logs
+          path: |
+            tests/e2e/output/
+            server.log
+            .dev/wordpress/wp-content/debug.log

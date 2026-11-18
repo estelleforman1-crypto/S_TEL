@@ -35,7 +35,7 @@ class JW_Admin {
 		add_submenu_page( 'jw-atelier', __( 'Overview', 'jewelry-workflows' ), __( 'Overview', 'jewelry-workflows' ), self::CAP, 'jw-atelier', array( __CLASS__, 'page_overview' ) );
 		add_submenu_page( 'jw-atelier', __( 'Record a request', 'jewelry-workflows' ), __( 'Record a request', 'jewelry-workflows' ), self::CAP, 'jw-record', array( __CLASS__, 'page_record' ) );
 		add_submenu_page( 'jw-atelier', __( 'Settings', 'jewelry-workflows' ), __( 'Settings', 'jewelry-workflows' ), 'manage_woocommerce', 'jw-settings', array( __CLASS__, 'page_settings' ) );
-		add_submenu_page( '', __( 'Quote', 'jewelry-workflows' ), '', self::CAP, 'jw-quote', array( __CLASS__, 'page_quote' ) );
+		add_submenu_page( 'options.php', __( 'Quote', 'jewelry-workflows' ), __( 'Quote', 'jewelry-workflows' ), self::CAP, 'jw-quote', array( __CLASS__, 'page_quote' ) );
 	}
 
 	private static function post_url( string $action, array $args = array() ): string {
@@ -203,6 +203,20 @@ class JW_Admin {
 		echo '<div><label for="jw-ce">' . esc_html__( 'Contact email', 'jewelry-workflows' ) . '</label><input type="text" id="jw-ce" name="contact_email" value="' . esc_attr( $s['contact_email'] ) . '"></div>';
 		echo '<div><label for="jw-wa">' . esc_html__( 'WhatsApp number (digits, with country code)', 'jewelry-workflows' ) . '</label><input type="text" id="jw-wa" name="contact_whatsapp" value="' . esc_attr( $s['contact_whatsapp'] ) . '"></div></div>';
 		echo '<p class="description">' . esc_html__( 'The default language is the language of the normal WordPress title and text fields. Choose it before you write content.', 'jewelry-workflows' ) . '</p>';
+		$attr_labels = (array) get_option( 'jw_attribute_labels', array() );
+		if ( wc_get_attribute_taxonomies() ) {
+			echo '<h2>' . esc_html__( 'Product option names in other languages', 'jewelry-workflows' ) . '</h2><div class="jw-grid">';
+			foreach ( wc_get_attribute_taxonomies() as $attr ) {
+				foreach ( JW_I18n::LANGS as $code => $info ) {
+					if ( $code === JW_I18n::default_lang() ) {
+						continue;
+					}
+					$id = 'jw-attr-' . $attr->attribute_name . '-' . $code;
+					echo '<div><label for="' . esc_attr( $id ) . '">' . esc_html( $attr->attribute_label . ' (' . $info['name'] . ')' ) . '</label><input type="text" dir="' . esc_attr( $info['dir'] ) . '" id="' . esc_attr( $id ) . '" name="jw_attr[' . esc_attr( $attr->attribute_name ) . '][' . esc_attr( $code ) . ']" value="' . esc_attr( $attr_labels[ $attr->attribute_name ][ $code ] ?? '' ) . '"></div>';
+				}
+			}
+			echo '</div><p class="description">' . esc_html__( 'Option values (sizes, materials) are translated on each term: Products > Attributes > Configure terms.', 'jewelry-workflows' ) . '</p>';
+		}
 		echo '<h2>' . esc_html__( 'Commission form', 'jewelry-workflows' ) . '</h2><div class="jw-grid">';
 		echo '<div><label for="jw-mf">' . esc_html__( 'Max photos', 'jewelry-workflows' ) . '</label><input type="number" id="jw-mf" name="upload_max_files" min="0" value="' . esc_attr( $s['upload_max_files'] ) . '"></div>';
 		echo '<div><label for="jw-mb">' . esc_html__( 'Max MB per photo', 'jewelry-workflows' ) . '</label><input type="number" id="jw-mb" name="upload_max_mb" min="1" value="' . esc_attr( $s['upload_max_mb'] ) . '"></div>';
@@ -227,6 +241,15 @@ class JW_Admin {
 			JW_Settings::update( $in );
 			self::back( admin_url( 'admin.php?page=jw-settings' ), __( 'Saved, but pickup stays off until you enter the pickup location and arrangements.', 'jewelry-workflows' ), true );
 		}
+		$labels = array();
+		foreach ( (array) ( $in['jw_attr'] ?? array() ) as $slug => $by_lang ) {
+			foreach ( (array) $by_lang as $code => $label ) {
+				if ( isset( JW_I18n::LANGS[ $code ] ) && '' !== trim( $label ) ) {
+					$labels[ sanitize_title( $slug ) ][ $code ] = sanitize_text_field( $label );
+				}
+			}
+		}
+		update_option( 'jw_attribute_labels', $labels );
 		JW_Settings::update( $in );
 		self::back( admin_url( 'admin.php?page=jw-settings' ), __( 'Settings saved.', 'jewelry-workflows' ) );
 	}

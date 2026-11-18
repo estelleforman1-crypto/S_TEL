@@ -20,6 +20,24 @@ class JW_Sale_Types {
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'purchase_terms' ), 25 );
 		add_action( 'woocommerce_single_product_summary', array( __CLASS__, 'maybe_swap_add_to_cart' ), 1 );
 		add_filter( 'woocommerce_loop_add_to_cart_link', array( __CLASS__, 'loop_link' ), 10, 2 );
+		add_action( 'woocommerce_product_query', array( __CLASS__, 'filter_catalog' ) );
+	}
+
+	/** Shop filter ?jw_type=ready|made_to_order. Products without the meta count as ready. */
+	public static function filter_catalog( WP_Query $q ): void {
+		$type = sanitize_key( $_GET['jw_type'] ?? '' );
+		if ( ! in_array( $type, array( 'ready', 'made_to_order' ), true ) ) {
+			return;
+		}
+		$meta   = (array) $q->get( 'meta_query' );
+		$meta[] = 'made_to_order' === $type
+			? array( 'key' => self::META, 'value' => 'made_to_order' )
+			: array(
+				'relation' => 'OR',
+				array( 'key' => self::META, 'value' => 'ready' ),
+				array( 'key' => self::META, 'compare' => 'NOT EXISTS' ),
+			);
+		$q->set( 'meta_query', $meta );
 	}
 
 	public static function type( $product ): string {

@@ -14,6 +14,7 @@ if ( get_option( 'jw_demo_seeded' ) ) {
 // ---------- WooCommerce settings (labeled development defaults) ----------
 update_option( 'woocommerce_currency', 'ILS' );                 // Unresolved: development default.
 update_option( 'woocommerce_default_country', 'IL' );
+update_option( 'woocommerce_default_customer_address', 'base' ); // Checkout starts with the store country (Israel).
 update_option( 'woocommerce_enable_guest_checkout', 'yes' );     // Proposed baseline: guest checkout.
 update_option( 'woocommerce_enable_checkout_login_reminder', 'yes' );
 update_option( 'woocommerce_enable_signup_and_login_from_checkout', 'no' );
@@ -275,6 +276,7 @@ jw_seed_menu( 'Primary', 'primary', array( $page_item( wc_get_page_id( 'shop' ) 
 jw_seed_menu( 'Footer', 'footer', array( $page_item( $contact ), $page_item( $delivery ), $page_item( $care ), $page_item( $returns ), $page_item( $privacy ) ) );
 
 JW_Settings::update( array( 'contact_email' => 'owner@example.test' ) );
+update_option( 'jw_attribute_labels', array( 'ring-size' => array( 'he' => 'מידת טבעת', 'fr' => 'Taille de bague' ), 'material' => array( 'he' => 'חומר', 'fr' => 'Matière' ) ) );
 update_option( 'jw_demo_seeded', time() );
 flush_rewrite_rules();
 WP_CLI::success( 'Demo data created. All products, prices, rates and policy text are placeholders.' );

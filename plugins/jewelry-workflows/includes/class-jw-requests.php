@@ -195,13 +195,14 @@ class JW_Requests {
 		if ( ! in_array( $form, array( 'mto', 'commission' ), true ) ) {
 			return;
 		}
-		self::$old = wp_unslash( $_POST );
+		// Fields are namespaced: plain names such as "name" are WordPress query variables and would turn the page into a 404.
+		self::$old = (array) wp_unslash( $_POST['jw'] ?? array() );
 		if ( ! wp_verify_nonce( $_POST['_jw_nonce'] ?? '', 'jw_form_' . $form ) ) {
 			self::$errors[] = __( 'Your session expired. Please submit the form again.', 'jewelry-workflows' );
 			return;
 		}
 		if ( ! empty( $_POST['jw_website'] ) ) { // Honeypot field, hidden from people.
-			wp_safe_redirect( add_query_arg( 'jw_request', 'received', wp_get_referer() ?: home_url( '/' ) ) );
+			wp_safe_redirect( add_query_arg( 'jw_request', 'received', JW_I18n::url_for_lang( JW_I18n::current() ) ) );
 			exit;
 		}
 		if ( self::throttled() ) {
@@ -228,7 +229,9 @@ class JW_Requests {
 			self::$errors[] = $id->get_error_message();
 			return;
 		}
-		$back = remove_query_arg( array( 'jw_request' ), wp_get_referer() ?: home_url( '/' ) );
+		// The page that showed the form. (wp_get_referer() is unusable here: with a language
+		// prefix it equals home_url() . REQUEST_URI and WordPress then returns false.)
+		$back = remove_query_arg( array( 'jw_request' ), JW_I18n::url_for_lang( JW_I18n::current() ) );
 		wp_safe_redirect( add_query_arg( 'jw_request', 'received', $back ) . '#jw-request' );
 		exit;
 	}
@@ -257,14 +260,14 @@ class JW_Requests {
 		ob_start();
 		?>
 		<div class="jw-field"><label for="jw-name"><?php esc_html_e( 'Name', 'jewelry-workflows' ); ?> <span aria-hidden="true">*</span></label>
-			<input id="jw-name" name="name" type="text" required autocomplete="name" value="<?php echo esc_attr( self::old( 'name' ) ); ?>"></div>
+			<input id="jw-name" name="jw[name]" type="text" required autocomplete="name" value="<?php echo esc_attr( self::old( 'name' ) ); ?>"></div>
 		<div class="jw-field"><label for="jw-email"><?php esc_html_e( 'Email', 'jewelry-workflows' ); ?> <span aria-hidden="true">*</span></label>
-			<input id="jw-email" name="email" type="email" required autocomplete="email" dir="ltr" value="<?php echo esc_attr( self::old( 'email' ) ); ?>"></div>
+			<input id="jw-email" name="jw[email]" type="email" required autocomplete="email" dir="ltr" value="<?php echo esc_attr( self::old( 'email' ) ); ?>"></div>
 		<div class="jw-field"><label for="jw-phone"><?php esc_html_e( 'Phone or WhatsApp (optional)', 'jewelry-workflows' ); ?></label>
-			<input id="jw-phone" name="phone" type="tel" autocomplete="tel" dir="ltr" value="<?php echo esc_attr( self::old( 'phone' ) ); ?>"></div>
+			<input id="jw-phone" name="jw[phone]" type="tel" autocomplete="tel" dir="ltr" value="<?php echo esc_attr( self::old( 'phone' ) ); ?>"></div>
 		<fieldset class="jw-field jw-field--inline"><legend><?php esc_html_e( 'Preferred contact', 'jewelry-workflows' ); ?></legend>
 			<?php foreach ( array( 'email' => __( 'Email', 'jewelry-workflows' ), 'whatsapp' => __( 'WhatsApp', 'jewelry-workflows' ), 'phone' => __( 'Phone', 'jewelry-workflows' ) ) as $k => $label ) : ?>
-				<label><input type="radio" name="contact_pref" value="<?php echo esc_attr( $k ); ?>" <?php checked( $pref, $k ); ?>> <?php echo esc_html( $label ); ?></label>
+				<label><input type="radio" name="jw[contact_pref]" value="<?php echo esc_attr( $k ); ?>" <?php checked( $pref, $k ); ?>> <?php echo esc_html( $label ); ?></label>
 			<?php endforeach; ?>
 		</fieldset>
 		<?php
@@ -278,14 +281,14 @@ class JW_Requests {
 		if ( JW_Settings::get( 'pickup_enabled' ) ) :
 			?>
 			<fieldset class="jw-field jw-field--inline"><legend><?php esc_html_e( 'Delivery', 'jewelry-workflows' ); ?></legend>
-				<label><input type="radio" name="delivery" value="ship" <?php checked( $delivery, 'ship' ); ?>> <?php esc_html_e( 'Ship to me', 'jewelry-workflows' ); ?></label>
-				<label><input type="radio" name="delivery" value="pickup" <?php checked( $delivery, 'pickup' ); ?>> <?php esc_html_e( 'Pickup', 'jewelry-workflows' ); ?></label>
+				<label><input type="radio" name="jw[delivery]" value="ship" <?php checked( $delivery, 'ship' ); ?>> <?php esc_html_e( 'Ship to me', 'jewelry-workflows' ); ?></label>
+				<label><input type="radio" name="jw[delivery]" value="pickup" <?php checked( $delivery, 'pickup' ); ?>> <?php esc_html_e( 'Pickup', 'jewelry-workflows' ); ?></label>
 			</fieldset>
 		<?php else : ?>
-			<input type="hidden" name="delivery" value="ship">
+			<input type="hidden" name="jw[delivery]" value="ship">
 		<?php endif; ?>
 		<div class="jw-field"><label for="jw-country"><?php esc_html_e( 'Delivery country', 'jewelry-workflows' ); ?><?php echo $required ? ' <span aria-hidden="true">*</span>' : ''; ?></label>
-			<select id="jw-country" name="country" autocomplete="country" <?php echo $required ? 'required' : ''; ?>>
+			<select id="jw-country" name="jw[country]" autocomplete="country" <?php echo $required ? 'required' : ''; ?>>
 				<option value=""><?php esc_html_e( 'Choose a country', 'jewelry-workflows' ); ?></option>
 				<?php foreach ( WC()->countries->get_countries() as $code => $label ) : ?>
 					<option value="<?php echo esc_attr( $code ); ?>" <?php selected( $country, $code ); ?>><?php echo esc_html( $label ); ?></option>
@@ -293,12 +296,12 @@ class JW_Requests {
 			</select></div>
 		<div class="jw-field-row">
 			<div class="jw-field"><label for="jw-city"><?php esc_html_e( 'City', 'jewelry-workflows' ); ?></label>
-				<input id="jw-city" name="city" type="text" autocomplete="address-level2" value="<?php echo esc_attr( self::old( 'city' ) ); ?>"></div>
+				<input id="jw-city" name="jw[city]" type="text" autocomplete="address-level2" value="<?php echo esc_attr( self::old( 'city' ) ); ?>"></div>
 			<div class="jw-field"><label for="jw-postcode"><?php esc_html_e( 'Postcode', 'jewelry-workflows' ); ?></label>
-				<input id="jw-postcode" name="postcode" type="text" autocomplete="postal-code" dir="ltr" value="<?php echo esc_attr( self::old( 'postcode' ) ); ?>"></div>
+				<input id="jw-postcode" name="jw[postcode]" type="text" autocomplete="postal-code" dir="ltr" value="<?php echo esc_attr( self::old( 'postcode' ) ); ?>"></div>
 		</div>
 		<div class="jw-field"><label for="jw-address"><?php esc_html_e( 'Street address', 'jewelry-workflows' ); ?></label>
-			<textarea id="jw-address" name="address" rows="2" autocomplete="street-address"><?php echo esc_textarea( self::old( 'address' ) ); ?></textarea></div>
+			<textarea id="jw-address" name="jw[address]" rows="2" autocomplete="street-address"><?php echo esc_textarea( self::old( 'address' ) ); ?></textarea></div>
 		<?php
 		return ob_get_clean();
 	}
@@ -322,13 +325,13 @@ class JW_Requests {
 		}
 		echo '<form id="jw-request" class="jw-form jw-form--mto" method="post" action="' . esc_url( get_permalink( $product->get_id() ) ) . '#jw-request" novalidate>';
 		echo self::notices(); // phpcs:ignore WordPress.Security.EscapeOutput -- escaped in notices().
-		echo '<input type="hidden" name="product_id" value="' . esc_attr( $product->get_id() ) . '">';
+		echo '<input type="hidden" name="jw[product_id]" value="' . esc_attr( $product->get_id() ) . '">';
 		if ( $product->is_type( 'variable' ) ) {
 			foreach ( $product->get_variation_attributes() as $attr => $values ) {
 				$key = 'attribute_' . sanitize_title( $attr );
 				$cur = isset( self::$old['attributes'][ $key ] ) ? (string) self::$old['attributes'][ $key ] : '';
 				echo '<div class="jw-field"><label for="jw-' . esc_attr( $key ) . '">' . esc_html( wc_attribute_label( $attr, $product ) ) . ' <span aria-hidden="true">*</span></label>';
-				echo '<select id="jw-' . esc_attr( $key ) . '" name="attributes[' . esc_attr( $key ) . ']" required><option value="">' . esc_html__( 'Choose an option', 'woocommerce' ) . '</option>';
+				echo '<select id="jw-' . esc_attr( $key ) . '" name="jw[attributes][' . esc_attr( $key ) . ']" required><option value="">' . esc_html__( 'Choose an option', 'woocommerce' ) . '</option>';
 				$terms = taxonomy_exists( $attr ) ? wc_get_product_terms( $product->get_id(), $attr, array( 'fields' => 'all' ) ) : array();
 				if ( $terms ) {
 					foreach ( $terms as $term ) {
@@ -344,10 +347,10 @@ class JW_Requests {
 				echo '</select></div>';
 			}
 		}
-		echo '<div class="jw-field jw-field--qty"><label for="jw-qty">' . esc_html__( 'Quantity', 'woocommerce' ) . '</label><input id="jw-qty" name="qty" type="number" min="1" max="20" value="' . esc_attr( self::old( 'qty', '1' ) ) . '" inputmode="numeric"></div>';
+		echo '<div class="jw-field jw-field--qty"><label for="jw-qty">' . esc_html__( 'Quantity', 'woocommerce' ) . '</label><input id="jw-qty" name="jw[qty]" type="number" min="1" max="20" value="' . esc_attr( self::old( 'qty', '1' ) ) . '" inputmode="numeric"></div>';
 		echo self::delivery_fields( true ); // phpcs:ignore WordPress.Security.EscapeOutput
 		echo self::contact_fields(); // phpcs:ignore WordPress.Security.EscapeOutput
-		echo '<div class="jw-field"><label for="jw-brief">' . esc_html__( 'Notes (optional)', 'jewelry-workflows' ) . '</label><textarea id="jw-brief" name="brief" rows="3">' . esc_textarea( self::old( 'brief' ) ) . '</textarea></div>';
+		echo '<div class="jw-field"><label for="jw-brief">' . esc_html__( 'Notes (optional)', 'jewelry-workflows' ) . '</label><textarea id="jw-brief" name="jw[brief]" rows="3">' . esc_textarea( self::old( 'brief' ) ) . '</textarea></div>';
 		echo '<p class="jw-form__note">' . esc_html__( 'This sends a request, not a payment. You will receive a quote with delivery cost, the full total, the deposit due now and the balance due later.', 'jewelry-workflows' ) . '</p>';
 		echo self::form_end( 'mto', __( 'Send request', 'jewelry-workflows' ) ); // phpcs:ignore WordPress.Security.EscapeOutput
 		echo '</form>';
@@ -362,16 +365,16 @@ class JW_Requests {
 		<form id="jw-request" class="jw-form jw-form--commission" method="post" enctype="multipart/form-data" novalidate>
 			<?php echo self::notices(); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			<div class="jw-field"><label for="jw-brief"><?php esc_html_e( 'Describe the piece you have in mind', 'jewelry-workflows' ); ?> <span aria-hidden="true">*</span></label>
-				<textarea id="jw-brief" name="brief" rows="6" required><?php echo esc_textarea( self::old( 'brief' ) ); ?></textarea></div>
+				<textarea id="jw-brief" name="jw[brief]" rows="6" required><?php echo esc_textarea( self::old( 'brief' ) ); ?></textarea></div>
 			<div class="jw-field"><label for="jw-prefs"><?php esc_html_e( 'Size and material preferences (optional)', 'jewelry-workflows' ); ?></label>
-				<textarea id="jw-prefs" name="prefs" rows="2"><?php echo esc_textarea( self::old( 'prefs' ) ); ?></textarea></div>
+				<textarea id="jw-prefs" name="jw[prefs]" rows="2"><?php echo esc_textarea( self::old( 'prefs' ) ); ?></textarea></div>
 			<div class="jw-field"><label for="jw-photos"><?php esc_html_e( 'Reference photos (optional)', 'jewelry-workflows' ); ?></label>
 				<input id="jw-photos" name="jw_photos[]" type="file" accept="image/jpeg,image/png,image/webp" multiple aria-describedby="jw-photos-help">
 				<p id="jw-photos-help" class="jw-help">
 					<?php /* translators: 1: number of photos, 2: megabytes */ echo esc_html( sprintf( __( 'Up to %1$d photos, JPEG, PNG or WebP, %2$d MB each. Photos are private and seen only by the maker.', 'jewelry-workflows' ), $max, $mb ) ); ?>
 				</p></div>
 			<div class="jw-field"><label for="jw-date"><?php esc_html_e( 'Desired date (optional)', 'jewelry-workflows' ); ?></label>
-				<input id="jw-date" name="desired_date" type="date" value="<?php echo esc_attr( self::old( 'desired_date' ) ); ?>" aria-describedby="jw-date-help">
+				<input id="jw-date" name="jw[desired_date]" type="date" value="<?php echo esc_attr( self::old( 'desired_date' ) ); ?>" aria-describedby="jw-date-help">
 				<p id="jw-date-help" class="jw-help"><?php esc_html_e( 'A wish, not a promise. Timing is confirmed in the quote.', 'jewelry-workflows' ); ?></p></div>
 			<?php echo self::delivery_fields( false ); // phpcs:ignore WordPress.Security.EscapeOutput ?>
 			<?php echo self::contact_fields(); // phpcs:ignore WordPress.Security.EscapeOutput ?>

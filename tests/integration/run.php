@@ -399,6 +399,9 @@ jw_test( 'Languages: one product, one stock, translated text', function () {
 	jw_assert( $he[3], 'Hebrew is right-to-left' );
 	$fr = JW_I18n::with_lang( 'fr', static fn() => array( wc_get_product( $p->get_id() )->get_stock_quantity(), wc_get_product( $p->get_id() )->get_price() ) );
 	jw_eq( array( wc_get_product( $p->get_id() )->get_stock_quantity(), wc_get_product( $p->get_id() )->get_price() ), $fr, 'same stock and price in every language' );
+	$var = wc_get_product( jw_product( 'demo-band-ring' )->get_children()[0] );
+	$vname = JW_I18n::with_lang( 'he', static fn() => wc_get_product( $var->get_id() )->get_name() );
+	jw_assert( str_starts_with( $vname, 'טבעת פס בהזמנה (הדגמה)' ) && str_contains( $vname, 'מתכת הדגמה' ), "Hebrew variation name, no recursion ({$vname})" );
 	jw_eq( 'en', JW_I18n::current(), 'language restored after the switch' );
 } );
 

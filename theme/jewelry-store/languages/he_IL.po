@@ -1,0 +1,173 @@
+# DRAFT TRANSLATION – review material only. The owner writes or approves the final text.
+# This file is distributed under the same license as the Jewelry Store theme.
+msgid ""
+msgstr ""
+"Project-Id-Version: Jewelry Store 0.1.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/theme/jewelry-store\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Language: he_IL\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Content-Transfer-Encoding: 8bit\n"
+"POT-Creation-Date: 2026-11-18T15:32:49+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: jewelry-store\n"
+
+#. Theme Name of the theme
+#: style.css
+msgid "Jewelry Store"
+msgstr ""
+
+#. Description of the theme
+#: style.css
+msgid "Code-owned storefront theme for the jewelry store. Image-led, monochrome, Hebrew/English/French with full RTL. No page builder."
+msgstr ""
+
+#: 404.php:6
+msgid "Page not found"
+msgstr "הדף לא נמצא"
+
+#: 404.php:7
+msgid "This page does not exist, or the piece is no longer listed."
+msgstr "הדף אינו קיים, או שהפריט כבר אינו מוצג."
+
+#: 404.php:9
+msgid "See all pieces"
+msgstr "לכל התכשיטים"
+
+#: 404.php:10
+msgid "Home"
+msgstr "דף הבית"
+
+#: footer.php:5
+msgid "Information"
+msgstr "מידע"
+
+#: footer.php:19
+msgid "Contact"
+msgstr "יצירת קשר"
+
+#: footer.php:25
+msgid "[Contact details to be supplied]"
+msgstr "[פרטי קשר יסופקו]"
+
+#: footer.php:30
+msgid "Language"
+msgstr "שפה"
+
+#: front-page.php:45
+msgid "Discover the pieces"
+msgstr "לגלות את התכשיטים"
+
+#: front-page.php:51
+msgid "Available now"
+msgstr "זמינים עכשיו"
+
+#: front-page.php:66
+msgid "All available pieces"
+msgstr "כל התכשיטים הזמינים"
+
+#: front-page.php:76
+msgid "Collection"
+msgstr "קולקציה"
+
+#: front-page.php:78
+msgid "See more"
+msgstr "לצפייה"
+
+#: front-page.php:86
+msgid "Made for you"
+msgstr "נוצר עבורך"
+
+#: front-page.php:90
+msgid "Made-to-order designs: choose the size and material on the piece, send a request, and receive a quote with delivery before paying a deposit."
+msgstr "עיצובים בהזמנה: בוחרים מידה וחומר בדף התכשיט, שולחים בקשה ומקבלים הצעת מחיר כולל משלוח לפני תשלום מקדמה."
+
+#: front-page.php:91
+msgid "Bespoke pieces: describe your idea and add reference photos. The design and price are agreed with you first."
+msgstr "תכשיטים בעיצוב אישי: מתארים את הרעיון ומצרפים תמונות השראה. העיצוב והמחיר נקבעים איתך מראש."
+
+#: front-page.php:93
+msgid "Made-to-order designs"
+msgstr "עיצובים בהזמנה"
+
+#: front-page.php:94
+msgid "Request a commission"
+msgstr "לבקשת הזמנה אישית"
+
+#: front-page.php:110
+msgid "Read more"
+msgstr "להמשך קריאה"
+
+#: functions.php:29
+#: header.php:26
+msgid "Main navigation"
+msgstr "ניווט ראשי"
+
+#: functions.php:30
+msgid "Footer links"
+msgstr ""
+
+#: functions.php:77
+#: functions.php:103
+msgid "Made to order"
+msgstr "בהזמנה"
+
+#: functions.php:80
+msgid "Sold"
+msgstr "נמכר"
+
+#: functions.php:83
+msgid "One of a kind"
+msgstr "יחיד במינו"
+
+#: functions.php:97
+msgid "Filter pieces"
+msgstr "סינון תכשיטים"
+
+#: functions.php:98
+msgid "All"
+msgstr "הכול"
+
+#: functions.php:103
+msgid "Any availability"
+msgstr "כל הזמינויות"
+
+#: functions.php:103
+msgid "Ready to ship"
+msgstr "מוכן למשלוח"
+
+#: functions.php:115
+msgid "Bag"
+msgstr "סל"
+
+#. translators: %d: number of items
+#: functions.php:117
+#, php-format
+msgid "%d item"
+msgid_plural "%d items"
+msgstr[0] "פריט %d"
+msgstr[1] "%d פריטים"
+
+#: functions.php:151
+msgid "Image to be supplied"
+msgstr "תמונה תסופק"
+
+#: header.php:10
+msgid "Skip to content"
+msgstr "דילוג לתוכן"
+
+#: header.php:12
+msgid "Development build: demo products, demo prices and placeholder brand. Nothing here is for sale."
+msgstr "גרסת פיתוח: מוצרים, מחירים ומותג להדגמה בלבד. דבר אינו מוצע למכירה."
+
+#: header.php:18
+msgid "Menu"
+msgstr "תפריט"
+
+#: index.php:14
+msgid "Nothing found"
+msgstr "לא נמצאו תוצאות"
