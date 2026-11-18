@@ -5,6 +5,7 @@
   "scripts": {
     "start": "node scripts/start.js",
     "reset": "node scripts/start.js --reset",
+    "images": "bash scripts/wp eval-file scripts/images.php",
     "test": "bash tests/run-integration.sh",
     "test:flows": "node tests/e2e/flows.js",
     "test:admin": "node tests/e2e/admin.js",

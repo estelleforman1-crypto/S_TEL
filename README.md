@@ -12,6 +12,7 @@ Online shop for an independent jewelry maker in Israel. WordPress and WooCommerc
 | `plugins/jewelry-workflows/` | Business workflows: requests, quotes, deposits, readiness and balance requests, the fulfillment gate, the late-payment stock guard, the three languages, the owner workspace ("Atelier" menu). |
 | `scripts/` | Reproducible development setup, demo seed data, local server, development-only mail sandbox and demo gateway. |
 | `tests/` | Integration tests (inside WordPress, real database) and browser tests (Playwright). |
+| `images/` | Development shop images. The file name decides where each one shows ([images/README.md](images/README.md)). |
 | `docs/` | Specification, decisions, commerce validation, owner guide, launch checklist, screenshots. |
 | `.github/workflows/ci.yml` | Runs every test against MySQL on each push. |
 
@@ -33,6 +34,7 @@ The first `npm start` builds the development shop (WordPress, WooCommerce, demo 
 |---|---|
 | `npm start` | Build the shop if needed, then run it. If it already runs, show where. |
 | `npm run reset` | Delete the development shop and its data, and build it again. |
+| `npm run images` | Put the pictures from the `images/` folder into the shop. See [images/README.md](images/README.md). |
 | `npm test` | Integration tests (inside WordPress). |
 | `npm run test:flows`, `test:admin`, `test:visual` | Browser tests (need the server running and, once, `npm run test:browser-install`). |
 

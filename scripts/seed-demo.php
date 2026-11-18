@@ -31,44 +31,6 @@ update_option( 'blogname', 'Atelier' ); // Placeholder wordmark. The brand name 
 update_option( 'blogdescription', 'Development build – placeholder brand' );
 update_option( 'woocommerce_jw_demo_settings', array( 'enabled' => 'yes' ) );
 
-// ---------- Demo images (generated, neutral, labeled) ----------
-function jw_seed_image( string $slug, int $w, int $h, int $seed, string $label ): int {
-	if ( ! function_exists( 'imagecreatetruecolor' ) ) {
-		return 0; // PHP gd extension missing: the theme shows labeled empty image areas instead.
-	}
-	$img = imagecreatetruecolor( $w, $h );
-	mt_srand( $seed );
-	$base = 200 + mt_rand( 0, 40 );
-	for ( $y = 0; $y < $h; $y++ ) {
-		$c   = (int) ( $base - 50 * ( $y / $h ) );
-		$col = imagecolorallocate( $img, $c, $c, $c - 4 );
-		imageline( $img, 0, $y, $w, $y, $col );
-	}
-	imagesetthickness( $img, max( 2, (int) ( $w / 260 ) ) );
-	$dark = imagecolorallocate( $img, 40, 40, 40 );
-	$lite = imagecolorallocate( $img, 250, 248, 244 );
-	$cx   = (int) ( $w * ( 0.35 + mt_rand( 0, 30 ) / 100 ) );
-	$cy   = (int) ( $h * 0.5 );
-	$r    = (int) ( min( $w, $h ) * ( 0.18 + mt_rand( 0, 10 ) / 100 ) );
-	imageellipse( $img, $cx, $cy, $r * 2, $r * 2, $dark );
-	imageellipse( $img, $cx, $cy, (int) ( $r * 1.7 ), (int) ( $r * 1.7 ), $dark );
-	imagefilledellipse( $img, $cx, $cy - $r, (int) ( $r * 0.28 ), (int) ( $r * 0.28 ), $lite );
-	imageellipse( $img, $cx, $cy - $r, (int) ( $r * 0.28 ), (int) ( $r * 0.28 ), $dark );
-	imagestring( $img, 5, 16, $h - 30, 'DEMO IMAGE - ' . $label, $dark );
-	$upload = wp_upload_dir();
-	$file   = $upload['path'] . "/demo-{$slug}.jpg";
-	imagejpeg( $img, $file, 85 );
-	imagedestroy( $img );
-	$id = wp_insert_attachment(
-		array( 'post_mime_type' => 'image/jpeg', 'post_title' => "Demo image: {$label}", 'post_status' => 'inherit' ),
-		$file
-	);
-	require_once ABSPATH . 'wp-admin/includes/image.php';
-	wp_update_attachment_metadata( $id, wp_generate_attachment_metadata( $id, $file ) );
-	update_post_meta( $id, '_wp_attachment_image_alt', "Demo placeholder image ({$label}). Not a real product photo." );
-	return $id;
-}
-
 // ---------- Categories ----------
 $cats = array();
 foreach ( array(
@@ -80,7 +42,6 @@ foreach ( array(
 	$cats[ $slug ] = (int) $t['term_id'];
 	update_term_meta( $cats[ $slug ], '_jw_he_name', $he );
 	update_term_meta( $cats[ $slug ], '_jw_fr_name', $fr );
-	update_term_meta( $cats[ $slug ], 'thumbnail_id', jw_seed_image( "cat-{$slug}", 1600, 1000, crc32( $slug ), $en ) );
 }
 
 // ---------- Attributes ----------
@@ -128,8 +89,6 @@ $p->set_stock_quantity( 3 );
 $p->set_category_ids( array( $cats['rings'] ) );
 $p->set_short_description( 'Demo ready-to-ship ring.' );
 $p->set_description( $demo_desc );
-$p->set_image_id( jw_seed_image( 'signet', 1200, 1500, 11, 'Signet ring' ) );
-$p->set_gallery_image_ids( array( jw_seed_image( 'signet-2', 1200, 1500, 12, 'Signet ring detail' ) ) );
 $p->update_meta_data( '_jw_sale_type', 'ready' );
 $signet = $p->save();
 jw_seed_translations( $signet, array( 'טבעת חותם (הדגמה)', 'טבעת הדגמה מוכנה למשלוח.' ), array( 'Bague chevalière (démo)', 'Bague de démonstration prête à expédier.' ) );
@@ -145,7 +104,6 @@ $p->set_sold_individually( true );
 $p->set_category_ids( array( $cats['necklaces'] ) );
 $p->set_short_description( 'Demo one-of-a-kind piece. Quantity 1.' );
 $p->set_description( $demo_desc );
-$p->set_image_id( jw_seed_image( 'pendant', 1200, 1500, 21, 'Pendant' ) );
 $p->update_meta_data( '_jw_sale_type', 'ready' );
 $pendant = $p->save();
 jw_seed_translations( $pendant, array( 'תליון יחיד במינו (הדגמה)', 'פריט הדגמה יחיד.' ), array( 'Pendentif unique (démo)', 'Pièce unique de démonstration.' ) );
@@ -158,7 +116,6 @@ $p->set_category_ids( array( $cats['earrings'] ) );
 $p->set_short_description( 'Demo ready-to-ship earrings in two demo metals.' );
 $p->set_description( $demo_desc );
 $p->set_attributes( array( jw_seed_attr_obj( $material, array( 'demo-silver', 'demo-gold' ), true ) ) );
-$p->set_image_id( jw_seed_image( 'hoops', 1200, 1500, 31, 'Hoop earrings' ) );
 $p->update_meta_data( '_jw_sale_type', 'ready' );
 $hoops = $p->save();
 foreach ( array( 'demo-silver' => '350', 'demo-gold' => '420' ) as $slug => $price ) {
@@ -180,7 +137,6 @@ $p->set_category_ids( array( $cats['rings'] ) );
 $p->set_short_description( 'Demo made-to-order ring. Choose size and metal.' );
 $p->set_description( $demo_desc );
 $p->set_attributes( array( jw_seed_attr_obj( $size, array( '50', '52', '54' ), true ), jw_seed_attr_obj( $material, array( 'demo-silver', 'demo-gold' ), true ) ) );
-$p->set_image_id( jw_seed_image( 'band', 1200, 1500, 41, 'Band ring' ) );
 $p->update_meta_data( '_jw_sale_type', 'made_to_order' );
 $p->update_meta_data( '_jw_lead_weeks', 4 );
 $band = $p->save();
@@ -203,7 +159,6 @@ $p->set_regular_price( '750' );
 $p->set_category_ids( array( $cats['necklaces'] ) );
 $p->set_short_description( 'Demo made-to-order necklace.' );
 $p->set_description( $demo_desc );
-$p->set_image_id( jw_seed_image( 'chain', 1200, 1500, 51, 'Chain necklace' ) );
 $p->update_meta_data( '_jw_sale_type', 'made_to_order' );
 $p->update_meta_data( '_jw_lead_weeks', 3 );
 $chain = $p->save();
@@ -234,7 +189,6 @@ function jw_seed_page( string $slug, string $title, string $content, array $he =
 $placeholder = static fn( string $what ) => "<p><strong>[Owner to supply: {$what}]</strong></p><p>This is a development placeholder. No policy, promise or business fact is stated here.</p>";
 
 $home = jw_seed_page( 'home', 'Demo Collection', '', array( 'קולקציית הדגמה', 'מסך פתיחה להדגמה' ), array( 'Collection démo', "Image d'ouverture de démonstration" ), 'Opening image placeholder' );
-set_post_thumbnail( $home, jw_seed_image( 'hero', 2400, 1350, 7, 'Opening image' ) );
 update_option( 'show_on_front', 'page' );
 update_option( 'page_on_front', $home );
 
@@ -280,6 +234,8 @@ jw_seed_menu( 'Footer', 'footer', array( $page_item( $contact ), $page_item( $de
 
 JW_Settings::update( array( 'contact_email' => 'owner@example.test' ) );
 update_option( 'jw_attribute_labels', array( 'ring-size' => array( 'he' => 'מידת טבעת', 'fr' => 'Taille de bague' ), 'material' => array( 'he' => 'חומר', 'fr' => 'Matière' ) ) );
+// Images: from the images/ folder, else generated DEMO placeholders. See scripts/images.php.
+require __DIR__ . '/images.php';
 update_option( 'jw_demo_seeded', time() );
 flush_rewrite_rules();
 WP_CLI::success( 'Demo data created. All products, prices, rates and policy text are placeholders.' );
