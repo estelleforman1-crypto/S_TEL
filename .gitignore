@@ -1,0 +1,8 @@
+# Local development site (WordPress core, WooCommerce, database). Never commit.
+/.dev/
+.env
+node_modules/
+/tests/e2e/output/
+*.log
+*.sql
+*.sqlite
