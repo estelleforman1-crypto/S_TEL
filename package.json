@@ -9,7 +9,8 @@
     "test:flows": "node tests/e2e/flows.js",
     "test:admin": "node tests/e2e/admin.js",
     "test:visual": "node tests/e2e/visual.js",
-    "test:browser-install": "playwright install --with-deps chromium"
+    "test:browser-install": "playwright install --with-deps chromium",
+    "doctor": "bash scripts/doctor.sh"
   },
   "devDependencies": {
     "playwright": "1.63.0"
