@@ -96,7 +96,9 @@ add_action(
 			$payload = array( 'order_id' => $order->get_id(), 'result' => $result, 'txn' => 'DEMO-' . wp_generate_password( 10, false ), 'amount' => $order->get_total() );
 			$payload['sig'] = JW_Dev_Demo_Gateway::sign( $payload );
 			// Server-to-server notification, as a real provider sends it. The browser return alone proves nothing.
-			wp_remote_post( add_query_arg( 'wc-api', 'jw_demo_callback', home_url( '/' ) ), array( 'body' => $payload, 'timeout' => 20, 'sslverify' => false ) );
+			// Call the local server directly: a public forwarded URL (Codespaces) needs a GitHub login.
+			$local = isset( $_SERVER['SERVER_PORT'] ) ? 'http://127.0.0.1:' . (int) $_SERVER['SERVER_PORT'] . '/' : home_url( '/' );
+			wp_remote_post( add_query_arg( 'wc-api', 'jw_demo_callback', $local ), array( 'body' => $payload, 'timeout' => 20, 'sslverify' => false ) );
 			wp_safe_redirect( $order->get_checkout_order_received_url() );
 			exit;
 		}

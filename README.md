@@ -17,6 +17,26 @@ Online shop for an independent jewelry maker in Israel. WordPress and WooCommerc
 
 WordPress core, WooCommerce and the database are **not** in the repository. The setup script downloads pinned versions.
 
+## Run it in GitHub Codespaces (easiest)
+
+[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/estelleforman1-crypto/S_TEL)
+
+1. Click the button above (or on GitHub: **Code > Codespaces > Create codespace**). Choose this branch if it is not merged yet.
+2. Wait for the first build. It takes a few minutes: it installs PHP extensions, WP-CLI, a test browser, then WordPress, WooCommerce and the demo shop.
+3. The shop opens in a preview tab. To open it in a normal browser tab: **Ports** tab > port 8080 "Shop" > globe icon.
+4. The terminal shows the admin address, user and password. Admin is the shop address + `/wp-admin`.
+
+Every time the codespace starts again, the web server starts by itself. If the page does not load, run `scripts/serve.sh` in the terminal. To start again with fresh demo data, run `scripts/setup-dev.sh --reset`.
+
+Good to know:
+
+- The forwarded address (`https://<name>-8080.app.github.dev`) is private: only you can open it while you are logged in to GitHub. Do not make the port public; the admin password is a development default.
+- The demo shop, emails (`.dev/mail/`) and database live inside the codespace and are not in Git. Deleting the codespace deletes them. That is fine: run the setup again.
+- A stopped codespace does not use compute hours. Stop it when you are done (GitHub stops it automatically after 30 minutes of inactivity).
+- To make new codespaces start faster, a repository admin can enable a **prebuild** for this branch in **Settings > Codespaces**.
+
+The same configuration (`.devcontainer/`) also works with VS Code Dev Containers on a computer with Docker.
+
 ## Run it locally
 
 Requirements: PHP 8.1 or later with `gd`, `intl`, `zip`, `pdo_sqlite` (or `mysqli`), [WP-CLI](https://wp-cli.org), `curl`, `unzip`. Node.js 18 or later for the browser tests.

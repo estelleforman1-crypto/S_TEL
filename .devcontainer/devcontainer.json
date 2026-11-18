@@ -1,0 +1,28 @@
+{
+  "name": "Jewelry Store",
+  "build": { "dockerfile": "Dockerfile" },
+  "features": {
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
+  },
+  "forwardPorts": [8080],
+  "portsAttributes": {
+    "8080": { "label": "Shop", "onAutoForward": "openPreview" }
+  },
+  "containerEnv": {
+    "PHP_CLI_SERVER_WORKERS": "4"
+  },
+  // Runs once, when the codespace is created: browser for tests, then the site with demo data.
+  "postCreateCommand": "npm install && npx playwright install --with-deps chromium && scripts/setup-dev.sh",
+  // Runs every time the codespace starts: start the web server in the background.
+  "postStartCommand": "nohup bash -c 'scripts/serve.sh > .dev/server.log 2>&1 &'",
+  "postAttachCommand": "scripts/dev-info.sh",
+  "customizations": {
+    "codespaces": {
+      "openFiles": ["README.md"]
+    },
+    "vscode": {
+      "extensions": ["bmewburn.vscode-intelephense-client"]
+    }
+  },
+  "hostRequirements": { "cpus": 2, "memory": "4gb" }
+}

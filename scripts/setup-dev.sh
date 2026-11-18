@@ -48,6 +48,12 @@ if [ ! -f "$WP_DIR/wp-config.php" ]; then
   $WP config set JW_DEV_MAIL_DIR "$ROOT/.dev/mail"
 fi
 
+# Development only: follow the address the visitor used (localhost, GitHub Codespaces).
+# See scripts/dev-wp-config.php. Added once, before WordPress loads.
+if ! grep -q "dev-wp-config.php" "$WP_DIR/wp-config.php"; then
+  php -r '$f = $argv[1]; $line = "require " . var_export( $argv[2], true ) . "; // Development only.\n"; $c = file_get_contents( $f ); $m = "require_once ABSPATH . \x27wp-settings.php\x27;"; file_put_contents( $f, str_replace( $m, $line . $m, $c ) );' "$WP_DIR/wp-config.php" "$ROOT/scripts/dev-wp-config.php"
+fi
+
 if [ "$DB_ENGINE" = "sqlite" ] && [ ! -f "$WP_DIR/wp-content/db.php" ]; then
   # WP-CLI cannot boot without a database, so fetch the SQLite drop-in directly.
   tmpzip="$(mktemp -d)/sqlite.zip"
@@ -94,6 +100,4 @@ install_lang core "" "$WP_VERSION" "$WP_DIR/wp-content/languages" || echo "WARN:
 install_lang plugins woocommerce "$WC_VERSION" "$WP_DIR/wp-content/languages/plugins" || echo "WARN: WooCommerce language packs not installed"
 
 $WP eval-file "$ROOT/scripts/seed-demo.php"
-echo
-echo "Ready. Start the server with: scripts/serve.sh"
-echo "Admin: $SITE_URL/wp-admin  user: $ADMIN_USER"
+"$ROOT/scripts/dev-info.sh"
