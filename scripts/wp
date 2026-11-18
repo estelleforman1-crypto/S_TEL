@@ -1,0 +1,28 @@
+#!/usr/bin/env bash
+# WP-CLI for the development site. Uses $WP_CLI, else "wp" on the PATH, else
+# downloads a pinned WP-CLI into .dev/bin (only PHP and curl are needed).
+# Usage: scripts/wp <command>   (for example: scripts/wp option get home)
+set -euo pipefail
+ROOT="$(cd "$(dirname "$0")/.." && pwd)"
+WP_CLI_VERSION="2.12.0"
+WP_DIR="${WP_DIR:-.dev/wordpress}"
+case "$WP_DIR" in /*) ;; *) WP_DIR="$ROOT/$WP_DIR" ;; esac
+
+if [ -n "${WP_CLI:-}" ]; then
+  read -r -a CMD <<< "$WP_CLI"
+elif command -v wp > /dev/null 2>&1; then
+  CMD=(wp)
+else
+  PHAR="$ROOT/.dev/bin/wp-cli-$WP_CLI_VERSION.phar"
+  if [ ! -f "$PHAR" ]; then
+    mkdir -p "$ROOT/.dev/bin"
+    echo "Downloading WP-CLI $WP_CLI_VERSION ..." >&2
+    curl -fsSL --retry 3 -o "$PHAR.tmp" "https://github.com/wp-cli/wp-cli/releases/download/v$WP_CLI_VERSION/wp-cli-$WP_CLI_VERSION.phar" \
+      || curl -fsSL --retry 3 -o "$PHAR.tmp" "https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar"
+    mv "$PHAR.tmp" "$PHAR"
+  fi
+  CMD=(php "$PHAR")
+fi
+EXTRA=()
+[ "$(id -u)" = "0" ] && EXTRA+=(--allow-root)
+exec "${CMD[@]}" --path="$WP_DIR" "${EXTRA[@]}" "$@"

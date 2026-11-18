@@ -1,6 +1,6 @@
 // End-to-end commerce flows through the browser, against the local dev site.
 // Usage: node tests/e2e/flows.js [baseUrl]
-// Needs: scripts/serve.sh running, WP-CLI (env WP_CLI, default "wp"). Uses the DEMO gateway and the mail sandbox only.
+// Needs: the dev server running (npm start). WP-CLI is found by scripts/wp. Uses the DEMO gateway and the mail sandbox only.
 const { chromium } = require('playwright');
 const { execFileSync } = require('child_process');
 const fs = require('fs');
@@ -9,8 +9,6 @@ const path = require('path');
 
 const BASE = process.argv[2] || process.env.SITE_URL || 'http://localhost:8080';
 const ROOT = path.resolve(__dirname, '../..');
-const WP_DIR = process.env.WP_DIR || path.join(ROOT, '.dev/wordpress');
-const WP = (process.env.WP_CLI || 'wp').split(' ');
 
 let pass = 0;
 const failures = [];
@@ -18,9 +16,7 @@ function check(cond, msg) {
 	if (cond) { pass++; console.log('  ok   ' + msg); } else { failures.push(msg); console.log('  FAIL ' + msg); }
 }
 function php(code) {
-	const args = [...WP.slice(1), `--path=${WP_DIR}`, 'eval', code];
-	if (process.getuid && process.getuid() === 0) args.push('--allow-root');
-	return execFileSync(WP[0], args, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
+	return execFileSync('bash', [path.join(ROOT, 'scripts/wp'), 'eval', code], { encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] }).trim();
 }
 function lastMailLink(pattern) {
 	const dir = path.join(ROOT, '.dev/mail');
@@ -232,7 +228,7 @@ async function passEmailCheck(page, email) {
 		const info = php(`$p = get_posts( array( 'post_type' => 'jw_request', 'numberposts' => 1, 'meta_key' => '_jw_email', 'meta_value' => 'bespoke@example.test' ) ); $f = get_post_meta( $p[0]->ID, '_jw_attachments', true ); echo $p[0]->ID . '|' . $f[0]['file'] . '|' . JW_Uploads::dir();`);
 		const [rid, file, dir] = info.split('|');
 		check(fs.existsSync(path.join(dir, file)), 'photo stored in the private directory');
-		check(!dir.startsWith(path.resolve(WP_DIR)), 'private directory is outside the web root');
+		check(!dir.startsWith(path.resolve(process.env.WP_DIR || path.join(ROOT, '.dev/wordpress'))), 'private directory is outside the web root');
 		const anon = await ctx.request.get(`${BASE}/wp-admin/admin-post.php?action=jw_attachment&request=${rid}&i=0`, { maxRedirects: 0 });
 		check(anon.status() !== 200, `an anonymous visitor cannot fetch it via the handler (HTTP ${anon.status()})`);
 		const guess = await ctx.request.get(`${BASE}/wp-content/uploads/jw-private/${file}`);

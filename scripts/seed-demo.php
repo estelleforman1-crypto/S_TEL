@@ -33,6 +33,9 @@ update_option( 'woocommerce_jw_demo_settings', array( 'enabled' => 'yes' ) );
 
 // ---------- Demo images (generated, neutral, labeled) ----------
 function jw_seed_image( string $slug, int $w, int $h, int $seed, string $label ): int {
+	if ( ! function_exists( 'imagecreatetruecolor' ) ) {
+		return 0; // PHP gd extension missing: the theme shows labeled empty image areas instead.
+	}
 	$img = imagecreatetruecolor( $w, $h );
 	mt_srand( $seed );
 	$base = 200 + mt_rand( 0, 40 );

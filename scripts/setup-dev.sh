@@ -17,11 +17,17 @@ SQLITE_PLUGIN_VERSION="${SQLITE_PLUGIN_VERSION:-3.1.3}"
 ADMIN_USER="${ADMIN_USER:-admin}"
 ADMIN_PASSWORD="${ADMIN_PASSWORD:-change-me-local-only}"
 ADMIN_EMAIL="${ADMIN_EMAIL:-dev@example.test}"
-WP="${WP_CLI:-wp} --path=$WP_DIR"
-[ "$(id -u)" = "0" ] && WP="$WP --allow-root"
+export WP_DIR
+WP="$ROOT/scripts/wp" # Finds or downloads WP-CLI.
+
+# Unzip with the unzip tool, or with PHP when the tool is missing.
+extract() {
+  if command -v unzip > /dev/null 2>&1; then unzip -qo "$1" -d "$2"
+  else php -r '$z = new ZipArchive(); if ( true !== $z->open( $argv[1] ) || ! $z->extractTo( $argv[2] ) ) { exit( 1 ); }' "$1" "$2"; fi
+}
 
 if [ "${1:-}" = "--reset" ]; then
-  rm -rf "$WP_DIR" .dev/mail .dev/private-uploads
+  rm -rf "$WP_DIR" .dev/mail .dev/private-uploads .dev/.setup-complete
   [ "$DB_ENGINE" = "mysql" ] && mysql -h"$DB_HOST" -u"$DB_USER" ${DB_PASSWORD:+-p"$DB_PASSWORD"} -e "DROP DATABASE IF EXISTS \`$DB_NAME\`" || true
 fi
 
@@ -58,7 +64,7 @@ if [ "$DB_ENGINE" = "sqlite" ] && [ ! -f "$WP_DIR/wp-content/db.php" ]; then
   # WP-CLI cannot boot without a database, so fetch the SQLite drop-in directly.
   tmpzip="$(mktemp -d)/sqlite.zip"
   curl -fsSL -o "$tmpzip" "https://downloads.wordpress.org/plugin/sqlite-database-integration.${SQLITE_PLUGIN_VERSION}.zip"
-  unzip -qo "$tmpzip" -d "$WP_DIR/wp-content/plugins/"
+  extract "$tmpzip" "$WP_DIR/wp-content/plugins/"
   sed -e "s#{SQLITE_IMPLEMENTATION_FOLDER_PATH}#$ROOT/$WP_DIR/wp-content/plugins/sqlite-database-integration#" \
       -e "s#{SQLITE_PLUGIN}#sqlite-database-integration/load.php#" \
       "$WP_DIR/wp-content/plugins/sqlite-database-integration/db.copy" > "$WP_DIR/wp-content/db.php"
@@ -93,11 +99,12 @@ install_lang() { # $1 = api path (core | plugins), $2 = slug, $3 = version, $4 =
   for loc in he_IL fr_FR; do
     url="$(printf '%s' "$json" | php -r '$j=json_decode(stream_get_contents(STDIN),true); foreach($j["translations"]??[] as $t){ if($t["language"]===$argv[1]){ echo $t["package"]; } }' "$loc")"
     [ -n "$url" ] || { echo "WARN: no $loc package for ${2:-core}"; continue; }
-    fetch "$url" .dev/lang.zip && mkdir -p "$4" && unzip -qo .dev/lang.zip -d "$4"
+    fetch "$url" .dev/lang.zip && mkdir -p "$4" && extract .dev/lang.zip "$4"
   done
 }
 install_lang core "" "$WP_VERSION" "$WP_DIR/wp-content/languages" || echo "WARN: core language packs not installed"
 install_lang plugins woocommerce "$WC_VERSION" "$WP_DIR/wp-content/languages/plugins" || echo "WARN: WooCommerce language packs not installed"
 
 $WP eval-file "$ROOT/scripts/seed-demo.php"
+touch .dev/.setup-complete
 "$ROOT/scripts/dev-info.sh"

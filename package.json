@@ -3,11 +3,18 @@
   "private": true,
   "description": "Browser tests for the jewelry store theme and workflows.",
   "scripts": {
-    "test:visual": "node tests/e2e/visual.js",
+    "start": "node scripts/start.js",
+    "reset": "node scripts/start.js --reset",
+    "test": "bash tests/run-integration.sh",
     "test:flows": "node tests/e2e/flows.js",
-    "test:admin": "node tests/e2e/admin.js"
+    "test:admin": "node tests/e2e/admin.js",
+    "test:visual": "node tests/e2e/visual.js",
+    "test:browser-install": "playwright install --with-deps chromium"
   },
   "devDependencies": {
     "playwright": "1.63.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
