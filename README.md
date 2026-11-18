@@ -45,6 +45,7 @@ Requirements: Node.js 18+, PHP 8.1+ with the `pdo_sqlite`, `curl`, `mbstring` an
 1. Create the codespace **from the branch that contains `.devcontainer/`** (until it is merged into `main`: Code > Codespaces > "…" > New with options > Branch). A codespace made from an empty `main` has no shop and no PHP setup; if that happened, delete it and create a new one from the right branch.
 2. The first build installs PHP, builds the shop and starts the server. The shop opens in a preview tab. To open it in a normal tab: **Ports** tab > port 8080 "Shop" > globe icon.
 3. Later, if the page does not load, run `npm start` in the terminal.
+4. If `npm`, `php` or other commands are "not found", the codespace runs in recovery mode or was created before this setup existed. Open the Command Palette (Ctrl+Shift+P, or Cmd+Shift+P on a Mac), run **Codespaces: Rebuild Container**, and wait for the build. Deleting the codespace and creating a new one from this branch also works.
 
 Good to know:
 
