@@ -23,7 +23,7 @@ WP="$ROOT/scripts/wp" # Finds or downloads WP-CLI.
 # Unzip with the unzip tool, or with PHP when the tool is missing.
 extract() {
   if command -v unzip > /dev/null 2>&1; then unzip -qo "$1" -d "$2"
-  else php -r '$z = new ZipArchive(); if ( true !== $z->open( $argv[1] ) || ! $z->extractTo( $argv[2] ) ) { exit( 1 ); }' "$1" "$2"; fi
+  else php -r 'if ( class_exists( "ZipArchive" ) ) { $z = new ZipArchive(); exit( true === $z->open( $argv[1] ) && $z->extractTo( $argv[2] ) ? 0 : 1 ); } ( new PharData( $argv[1] ) )->extractTo( $argv[2], null, true );' "$1" "$2"; fi
 }
 
 if [ "${1:-}" = "--reset" ]; then

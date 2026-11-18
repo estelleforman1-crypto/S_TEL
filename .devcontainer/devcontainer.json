@@ -1,29 +1,20 @@
 {
   "name": "Jewelry Store",
-  "build": { "dockerfile": "Dockerfile" },
-  "features": {
-    "ghcr.io/devcontainers/features/node:1": { "version": "22" }
-  },
+  // Ready-made image (PHP 8.3, Node, git, curl). No custom build step that could fail.
+  "image": "mcr.microsoft.com/devcontainers/php:1-8.3-bookworm",
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": { "label": "Shop", "onAutoForward": "openPreview" }
   },
-  "containerEnv": {
-    "PHP_CLI_SERVER_WORKERS": "4"
-  },
-  // Runs once, when the codespace is created. The shop is built first; the test browser
-  // is optional and cannot block it.
-  "postCreateCommand": "npm install && npm start -- --build-only; npx playwright install --with-deps chromium || echo 'Optional test browser not installed. Later: npm run test:browser-install'",
+  // Runs once when the codespace is created. Each step is allowed to fail on its own
+  // without stopping the shop build: extra PHP extensions, then the shop, then the test browser.
+  "postCreateCommand": "bash scripts/codespace-setup.sh",
   // Runs every time the codespace starts: the web server, in the background.
   "postStartCommand": "nohup bash -c 'npm start > /tmp/jewelry-server.log 2>&1 &'",
   "postAttachCommand": "bash scripts/dev-info.sh",
   "customizations": {
-    "codespaces": {
-      "openFiles": ["README.md"]
-    },
     "vscode": {
       "extensions": ["bmewburn.vscode-intelephense-client"]
     }
-  },
-  "hostRequirements": { "cpus": 2, "memory": "4gb" }
+  }
 }

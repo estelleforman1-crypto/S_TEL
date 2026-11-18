@@ -38,8 +38,8 @@ function fail(msg) {
 if (!has('bash')) fail('bash is required (Linux, macOS, WSL or GitHub Codespaces).');
 if (!has('php')) {
 	fail('PHP 8.1 or later is not installed.\n' +
-		'  In GitHub Codespaces: create the codespace from the branch that contains .devcontainer/\n' +
-		'  (Code > Codespaces > ... > New with options > Branch), or run: Rebuild Container.\n' +
+		'  In GitHub Codespaces: open the Command Palette (Ctrl+Shift+P / Cmd+Shift+P) and run\n' +
+		'  "Codespaces: Rebuild Container". If the codespace is in "recovery mode", that is the fix.\n' +
 		'  On Debian/Ubuntu: sudo apt-get install -y php-cli php-sqlite3 php-gd php-intl php-zip php-curl php-xml php-mbstring');
 }
 const phpVersion = spawnSync('php', ['-r', 'echo PHP_VERSION;'], { encoding: 'utf8' }).stdout.trim();
@@ -55,7 +55,7 @@ for (const [mod, why] of [['gd', 'demo images are skipped'], ['intl', 'some form
 	if (!modules.includes(mod)) console.warn(`  Note: PHP extension "${mod}" is missing; ${why}.`);
 }
 if (!has('curl')) fail('curl is required to download WordPress and WooCommerce.');
-if (!has('unzip') && !modules.includes('zip')) fail('either the "unzip" tool or the PHP zip extension is required.');
+if (!has('unzip') && !modules.includes('zip') && !modules.includes('phar')) fail('the "unzip" tool, or the PHP zip or phar extension, is required.');
 
 // ---- Is the server already running? ----------------------------------------
 function portOpen(port) {
