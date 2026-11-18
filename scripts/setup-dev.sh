@@ -33,8 +33,17 @@ fi
 
 mkdir -p "$WP_DIR" .dev/mail .dev/private-uploads
 
+# Downloads use curl, so they work behind HTTPS proxies that PHP does not use.
+fetch() { curl -fsSL --retry 3 -o "$2" "$1"; }
+
+# Download WordPress with curl and unpack it with extract(), not "wp core download":
+# WP-CLI needs the PHP zip extension for that, which some machines lack.
 if [ ! -f "$WP_DIR/wp-load.php" ]; then
-  $WP core download --version="$WP_VERSION" --skip-content
+  echo "Downloading WordPress $WP_VERSION ..."
+  fetch "https://downloads.wordpress.org/release/wordpress-$WP_VERSION-no-content.zip" .dev/wordpress.zip
+  rm -rf .dev/wordpress-unpack && extract .dev/wordpress.zip .dev/wordpress-unpack
+  cp -a .dev/wordpress-unpack/wordpress/. "$WP_DIR/"
+  rm -rf .dev/wordpress-unpack .dev/wordpress.zip
 fi
 mkdir -p "$WP_DIR/wp-content/plugins" "$WP_DIR/wp-content/themes" "$WP_DIR/wp-content/mu-plugins"
 
@@ -81,11 +90,10 @@ ln -sfn "$ROOT/plugins/jewelry-workflows" "$WP_DIR/wp-content/plugins/jewelry-wo
 # Development-only helpers: mail sandbox and labeled mock gateway. Never deploy.
 ln -sfn "$ROOT/scripts/dev-mu-plugins/jw-dev-sandbox.php" "$WP_DIR/wp-content/mu-plugins/jw-dev-sandbox.php"
 
-# Downloads use curl, so they work behind HTTPS proxies that PHP does not use.
-fetch() { curl -fsSL --retry 3 -o "$2" "$1"; }
-if ! $WP plugin is-installed woocommerce; then
+if [ ! -f "$WP_DIR/wp-content/plugins/woocommerce/woocommerce.php" ]; then
   fetch "https://downloads.wordpress.org/plugin/woocommerce.${WC_VERSION}.zip" .dev/woocommerce.zip
-  $WP plugin install .dev/woocommerce.zip
+  extract .dev/woocommerce.zip "$WP_DIR/wp-content/plugins/"
+  rm -f .dev/woocommerce.zip
 fi
 $WP plugin activate woocommerce
 $WP plugin activate jewelry-workflows

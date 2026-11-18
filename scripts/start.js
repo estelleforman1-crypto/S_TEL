@@ -67,7 +67,9 @@ function portOpen(port) {
 }
 
 (async () => {
-	if (await portOpen(PORT)) {
+	const built = fs.existsSync(MARKER) && fs.existsSync(path.join(WP_DIR, 'wp-config.php'));
+	if (!buildOnly && await portOpen(PORT)) {
+		if (!built) fail(`a server is running on port ${PORT}, but the shop is not built yet. Stop that server first (pkill -f "php.*-S"), then run npm start again.`);
 		if (reset) fail(`a server is already running on port ${PORT}. Stop it first (pkill -f "php.*-S"), then run npm start -- --reset.`);
 		console.log(`\n  The shop server is already running on port ${PORT}.`);
 		spawnSync('bash', ['scripts/dev-info.sh'], { stdio: 'inherit' });
@@ -75,7 +77,6 @@ function portOpen(port) {
 	}
 
 	// ---- Build the site the first time (or after --reset) -------------------
-	const built = fs.existsSync(MARKER) && fs.existsSync(path.join(WP_DIR, 'wp-config.php'));
 	if (reset || !built) {
 		console.log(reset ? '\n  Rebuilding the development shop from zero...\n' : '\n  First run: building the development shop (WordPress, WooCommerce, demo data). This takes a few minutes...\n');
 		const r = spawnSync('bash', ['scripts/setup-dev.sh', ...(reset ? ['--reset'] : [])], { stdio: 'inherit', env: process.env });

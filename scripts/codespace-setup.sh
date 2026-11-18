@@ -9,6 +9,9 @@ echo "== 1/3 Optional PHP extensions (images, languages, zip)"
 missing=""
 for m in gd intl zip; do php -m | grep -qix "$m" || missing="$missing $m"; done
 if [ -n "$missing" ] && command -v docker-php-ext-install > /dev/null; then
+  # The image lists a Yarn package source whose signing key has expired, which makes
+  # "apt-get update" fail. Yarn is not needed here, so drop that source first.
+  $SUDO rm -f /etc/apt/sources.list.d/yarn.list
   ( $SUDO apt-get update -qq \
     && $SUDO apt-get install -y -qq libpng-dev libjpeg62-turbo-dev libfreetype6-dev libicu-dev libzip-dev unzip > /dev/null \
     && $SUDO docker-php-ext-configure gd --with-jpeg --with-freetype > /dev/null \
