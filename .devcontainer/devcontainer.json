@@ -6,6 +6,9 @@
   "features": {
     "ghcr.io/devcontainers/features/node:1": { "version": "lts" }
   },
+  // The image turns on Xdebug step debugging, which tries to reach a debugger on every
+  // request and slows WordPress down. Remove this line to debug with Xdebug.
+  "containerEnv": { "XDEBUG_MODE": "off" },
   "forwardPorts": [8080],
   "portsAttributes": {
     "8080": { "label": "Shop", "onAutoForward": "openPreview" }
