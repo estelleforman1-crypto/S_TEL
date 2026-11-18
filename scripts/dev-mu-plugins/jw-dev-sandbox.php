@@ -133,3 +133,27 @@ add_action(
 		exit( 'ok' );
 	}
 );
+
+/* ---------- Images from the images/ folder: replace a file, refresh the page ---------- */
+
+add_action(
+	'wp_loaded',
+	static function () {
+		if ( ( defined( 'WP_CLI' ) && WP_CLI ) || wp_doing_cron() ) {
+			return;
+		}
+		require_once dirname( __DIR__ ) . '/images.php';
+		if ( get_option( 'jw_images_signature' ) === jw_images_signature() ) {
+			return; // Nothing changed: the usual case, and cheap.
+		}
+		if ( ! add_option( 'jw_images_lock', time(), '', false ) && (int) get_option( 'jw_images_lock' ) > time() - 120 ) {
+			return; // Another request is already updating the images.
+		}
+		update_option( 'jw_images_lock', time(), false );
+		try {
+			jw_images_sync();
+		} finally {
+			delete_option( 'jw_images_lock' );
+		}
+	}
+);

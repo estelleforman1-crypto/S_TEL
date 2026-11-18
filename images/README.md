@@ -1,25 +1,17 @@
 # Shop images
 
-Put image files here, then run:
+Every picture in the shop is a file in this folder. To change one, **replace the file with a new picture of the same name**, then refresh the browser.
 
-```bash
-npm run images
-```
+| File | Where it shows |
+|---|---|
+| `home.jpg` | Big opening image on the home page (wide) |
+| `rings.jpg`, `earrings.jpg`, `necklaces.jpg` | Category panels on the home page (wide) |
+| `signet-ring.jpg`, `band-ring.jpg`, ... | That product's photo (upright, 4:5) |
+| `signet-ring-2.jpg` | A second photo for that product. Add `-3`, `-4` for more. |
+| `about.jpg` (add it if you want) | Maker portrait on the home page and About page |
 
-Refresh the browser to see them. The **file name** decides where an image goes:
+- `.jpg`, `.png` and `.webp` all work (`band-ring.png` replaces `band-ring.jpg`; keep only one).
+- Delete a file to leave that spot empty.
+- Pictures are cropped to fill their frame, so keep the subject near the center.
 
-| File | Where it shows | Best shape |
-|---|---|---|
-| `pages/home.jpg` | Opening image on the home page | Wide, 16:9 (e.g. 2400×1350) |
-| `pages/about.jpg` | Maker portrait (home page and About page) | Upright, 4:5 |
-| `categories/rings.jpg`, `earrings.jpg`, `necklaces.jpg` | Category panels on the home page | Wide, 16:9 (e.g. 1600×1000) |
-| `products/<product-slug>.jpg` | Product main image | Upright, 4:5 (e.g. 1200×1500) |
-| `products/<product-slug>-2.jpg`, `-3.jpg`, ... | Extra product images, in that order | Upright, 4:5 |
-
-Demo product slugs: `demo-signet-ring`, `demo-one-of-a-kind-pendant`, `demo-hoop-earrings`, `demo-band-ring`, `demo-chain-necklace`. A product's slug is the last part of its address (`/product/demo-band-ring/`).
-
-- `.jpg`, `.jpeg`, `.png` and `.webp` work. Use one file per name.
-- Replace a file and run `npm run images` again to swap the image. Delete a file to bring back the grey DEMO placeholder.
-- Images are cropped to fill their frame, so keep the subject near the center.
-
-This folder feeds the **development shop** only. On the live site, photos are uploaded in WordPress admin (Products > edit product > Product image), because products are content, not code.
+This folder is for the development shop. On the live site, photos are uploaded in WordPress admin.
